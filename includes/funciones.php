@@ -141,6 +141,5 @@ function t(string $texto): string {
         'Texto Entrada Blog'=>'Blog entry text','Texto entrada blog'=>'Blog entry text',
         'imagen de la propiedad'=>'property image'
     ];
-    ];
     return idiomaActual() === 'en' ? ($traducciones[$texto] ?? $texto) : $texto;
 }
