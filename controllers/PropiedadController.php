@@ -31,7 +31,9 @@ class PropiedadController {
         // Ejecutar el código después de que el usuario envia el formulario
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             /** Crea una nueva instancia */
-            $propiedad = new Propiedad($_POST['propiedad']);
+            $args = $_POST['propiedad'];
+            $args['vendedorId'] = (int) ($args['vendedorId'] ?? 0);
+            $propiedad = new Propiedad($args);
             // Generar un nombre único
             $nombreImagen = md5(uniqid(rand(), true)) . ".webp";
             $image = null;
@@ -82,6 +84,7 @@ class PropiedadController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Asignar los atributos
             $args = $_POST['propiedad'];
+            $args['vendedorId'] = (int) ($args['vendedorId'] ?? 0);
 
             $propiedad->sincronizar($args);
             // Validación

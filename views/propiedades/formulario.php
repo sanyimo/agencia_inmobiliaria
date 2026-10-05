@@ -69,9 +69,9 @@
     <legend></legend>
     <label for="vendedor">Vendedor/a</label>
     <select name="propiedad[vendedorId]" id="vendedor">
-        <option disabled selected value="">-- Seleccionar --</option>
+        <option disabled value="" <?php echo empty($propiedad->vendedorId) ? 'selected' : '' ?>>-- Seleccionar --</option>
         <?php foreach ($vendedores ?? [] as $vendedor) { ?>
-            <option <?php echo ($propiedad->vendedorId ?? null) === $vendedor->id ? 'selected' : '' ?> value="<?php echo s($vendedor->id); ?>"><?php echo s($vendedor->nombre) . " " . s($vendedor->apellido); ?></option>
+            <option <?php echo (string) ($propiedad->vendedorId ?? '') === (string) $vendedor->id ? 'selected' : '' ?> value="<?php echo s($vendedor->id); ?>"><?php echo s($vendedor->nombre) . " " . s($vendedor->apellido); ?></option>
         <?php } ?>
     </select>
 </fieldset>
