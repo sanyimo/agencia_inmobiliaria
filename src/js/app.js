@@ -9,6 +9,7 @@ function darkMode() {
     const prefiereDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
     const botonDarkMode = document.querySelector('.dark-mode-boton');
     const iconoDarkMode = botonDarkMode.querySelector('img');
+    const preferenciaGuardada = localStorage.getItem('dark-mode');
 
     function actualizarIcono() {
         const modoOscuro = document.body.classList.contains('dark-mode');
@@ -24,7 +25,11 @@ function darkMode() {
         botonDarkMode.setAttribute('aria-label', botonDarkMode.title);
     }
 
-    if(prefiereDarkMode.matches) {
+    if(preferenciaGuardada === 'dark') {
+        document.body.classList.add('dark-mode');
+    } else if(preferenciaGuardada === 'light') {
+        document.body.classList.remove('dark-mode');
+    } else if(prefiereDarkMode.matches) {
         document.body.classList.add('dark-mode');
     } else {
         document.body.classList.remove('dark-mode');
@@ -33,12 +38,18 @@ function darkMode() {
     actualizarIcono();
 
     prefiereDarkMode.addEventListener('change', function() {
-        document.body.classList.toggle('dark-mode');
-        actualizarIcono();
+        if(!localStorage.getItem('dark-mode')) {
+            document.body.classList.toggle('dark-mode');
+            actualizarIcono();
+        }
     });
 
     botonDarkMode.addEventListener('click', function() {
         document.body.classList.toggle('dark-mode');
+        localStorage.setItem(
+            'dark-mode',
+            document.body.classList.contains('dark-mode') ? 'dark' : 'light'
+        );
         actualizarIcono();
     });
 }
