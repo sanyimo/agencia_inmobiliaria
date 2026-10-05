@@ -25,7 +25,7 @@
             </div>
         </div><!--.barra-->
 
-        <?php  echo $inicio ? "<h1 ><?php echo t('Venta de casas y apartamentos exclusivos de lujo'); ?></h1>" : ''; ?>
+        <?php echo $inicio ? '<h1>' . t('Venta de casas y apartamentos exclusivos de lujo') . '</h1>' : ''; ?>
     </div>
 </header>
     
