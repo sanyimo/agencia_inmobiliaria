@@ -15,9 +15,13 @@ $vendedor->email ??= '';
     <label for="imagen">Imagen:</label>
     <input type="file"
     id="imagen" accept="image/webp, image/avif, image/jpeg, image/png" name="vendedor[imagen]">
-    <?php if ($vendedor->imagen) { ?>
-        <img src="/imagenes/imagenesVendedores/<?php echo $vendedor->imagen; ?>" class="pic-small">
-    <?php } ?>
+    <img
+        id="preview-imagen"
+        src="<?php echo $vendedor->imagen ? '/imagenes/imagenesVendedores/' . $vendedor->imagen : ''; ?>"
+        class="pic-small"
+        <?php echo $vendedor->imagen ? '' : 'hidden'; ?>
+        alt="Vista previa de la imagen del vendedor"
+    >
 
     <label for="nombre">Nombre:</label>
     <input type="text" id="nombre" name="vendedor[nombre]" placeholder="Nombre vendedor" value="<?php echo s($vendedor->nombre); ?>">
@@ -36,3 +40,27 @@ $vendedor->email ??= '';
     <label for="email">E-mail:</label>
     <input type="email" id="email" name="vendedor[email]" class="muestra" placeholder="&#xf0e0;" value="<?php echo s($vendedor->email); ?>">
 </fieldset>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const input = document.getElementById('imagen');
+    const preview = document.getElementById('preview-imagen');
+
+    if (!input || !preview) {
+        return;
+    }
+
+    input.addEventListener('change', () => {
+        const [file] = input.files;
+
+        if (!file) {
+            return;
+        }
+
+        const url = URL.createObjectURL(file);
+        preview.src = url;
+        preview.hidden = false;
+        preview.onload = () => URL.revokeObjectURL(url);
+    });
+});
+</script>
