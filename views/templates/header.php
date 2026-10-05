@@ -12,10 +12,10 @@
                 <button class="dark-mode-boton" type="button" aria-label="Alternar modo oscuro">
                     <img src="/build/img/dark-mode.svg" alt="">
                 </button>
-                <nav class="navegacion">
+                <nav class="navegacion"><span class="idiomas"><a href="?lang=es">ES</a> | <a href="?lang=en">EN</a></span>
                     <a href="/nosotros">Nosotros</a>
                     <a href="/propiedades">Anuncios</a>
-                    <a href="/blog">Blog</a>
+                    <a href="/blog"><?php echo t('Blog'); ?></a>
                     <a href="/contacto">Contacto</a>
                     <?php if($auth): ?>
                         <a class="admin-link" href="/admin">Admin</a>
@@ -25,7 +25,7 @@
             </div>
         </div><!--.barra-->
 
-        <?php  echo $inicio ? "<h1 >Venta de casas y apartamentos exclusivos de lujo</h1>" : ''; ?>
+        <?php  echo $inicio ? "<h1 ><?php echo t('Venta de casas y apartamentos exclusivos de lujo'); ?></h1>" : ''; ?>
     </div>
 </header>
     
