@@ -32,16 +32,16 @@
         width: 2.8rem;
         margin-top: 3rem;
         margin-bottom: 2rem;
+        padding: .5rem;
+        border: 0;
+        background: transparent;
         filter: invert(100%);
+        cursor: pointer;
 
-        &:hover {
-            cursor: pointer;
-        }
         &:active {
             color: color.adjust(v.$blanco, $lightness: -7%);
-                transform: scale(0.6) rotateZ(50deg) !important;
-                transition: all 0.1s ease-in-out !important;
-            
+            transform: scale(0.6) rotateZ(50deg) !important;
+            transition: all 0.1s ease-in-out !important;
         }
 
         @include m.tablet {
@@ -61,10 +61,10 @@
         justify-content: space-between;
         align-items: flex-end;
         
-        img {
+        img:not(.dark-mode-boton img) {
             &:hover {
-            animation: breathing 2s ease-in-out infinite
-        }
+                animation: breathing 2s ease-in-out infinite
+            }
         }
     }
 }
@@ -114,9 +114,9 @@
         display: none;
     }
 &:active {
-        transform: scale(.7, .7);
-        transition: all 0.1s ease-in-out;
-        }
+    transform: scale(.7, .7);
+    transition: all 0.1s ease-in-out;
+    }
     img {
         width: 5rem;
     }

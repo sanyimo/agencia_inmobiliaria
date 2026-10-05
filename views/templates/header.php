@@ -9,7 +9,9 @@
             </div>
             
             <div class="derecha">
-                <img class="dark-mode-boton" src="/build/img/dark-mode.svg" alt="boton modo oscuro ">
+                <button class="dark-mode-boton" type="button" aria-label="Alternar modo oscuro">
+                    <img src="/build/img/dark-mode.svg" alt="">
+                </button>
                 <nav class="navegacion">
                     <a href="/nosotros">Nosotros</a>
                     <a href="/propiedades">Anuncios</a>

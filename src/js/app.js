@@ -7,24 +7,32 @@ document.addEventListener('DOMContentLoaded', function() {
 function darkMode() {
 
     const prefiereDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
+    const botonDarkMode = document.querySelector('.dark-mode-boton');
+    const iconoDarkMode = botonDarkMode.querySelector('img');
 
-    console.log(prefiereDarkMode.matches);
-    
-    //matches
+    function actualizarIcono() {
+        iconoDarkMode.src = document.body.classList.contains('dark-mode')
+            ? '/build/img/sun-solid.svg'
+            : '/build/img/dark-mode.svg';
+    }
+
     if(prefiereDarkMode.matches) {
         document.body.classList.add('dark-mode');
     } else {
         document.body.classList.remove('dark-mode');
     }
 
+    actualizarIcono();
+
     prefiereDarkMode.addEventListener('change', function() {
         document.body.classList.toggle('dark-mode');
+        actualizarIcono();
     });
 
-     const botonDarkMode = document.querySelector('.dark-mode-boton');
-     botonDarkMode.addEventListener('click', function() {
-         document.body.classList.toggle('dark-mode');
-     });
+    botonDarkMode.addEventListener('click', function() {
+        document.body.classList.toggle('dark-mode');
+        actualizarIcono();
+    });
 }
 
 function eventListeners() {
