@@ -19,6 +19,7 @@ class Router {
        
         //arreglo de rutas protegidas
         $rutas_protegidas = ['/admin','/propiedades/admin', '/propiedades/crear', '/propiedades/actualizar', '/propiedades/eliminar', 'vendedores/admin', '/vendedores/crear', '/vendedores/actualizar', '/vendedores/eliminar'];
+        $rutas_demo_bloqueadas = ['/propiedades/crear', '/propiedades/actualizar', '/propiedades/eliminar', '/vendedores/crear', '/vendedores/actualizar', '/vendedores/eliminar'];
         $urlActual = $_SERVER['PATH_INFO'] ?? '/' ;//path_info no existe en apache sino request_uri
         //$urlActual = $_SERVER['REQUEST_URI'] === '' ? '/' : $_SERVER['REQUEST_URI'] ;
         $metodo = $_SERVER['REQUEST_METHOD'];
@@ -34,6 +35,14 @@ class Router {
         if(in_array($urlActual, $rutas_protegidas) && !$auth) {
 
            header('Location: /');
+           exit;
+        }
+
+        if($_SESSION['demo'] ?? false) {
+            if($metodo === 'POST' && in_array($urlActual, $rutas_demo_bloqueadas)) {
+                header('Location: /admin');
+                exit;
+            }
         }
         
         if ( $fn ) {
@@ -48,7 +57,7 @@ class Router {
     public function render(string $view, array $datos = []) {
         // Leer lo que le pasamos  a la vista
         foreach ($datos as $key => $value) {
-            $$key = $value;  // Doble signo de dolar significa: variable variable, básicamente nuestra variable sigue siendo la original, pero al asignarla a otra no la reescribe, mantiene su valor, de esta forma el nombre de la variable se asigna dinamicamente
+            $$key = $value;  // Doble signo de dolar significa: variable variable, básicamente nuestra variable sigue siendo la original, pero al asignarla no reescribe el original, mantiene su valor, de esta forma el nombre de la variable se asigna dinamicamente
         }
 
         ob_start(); // Almacenamiento en memoria durante un momento...
