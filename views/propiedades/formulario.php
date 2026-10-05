@@ -10,9 +10,13 @@
     <label for="imagen">Imagen:</label>
     <input type="file"
     id="imagen" accept="image/webp, image/avif, image/jpeg, image/png" name="propiedad[imagen]">
-    <?php if(($propiedad->imagen ?? null)) { ?>
-        <img src="/imagenes/imagenesPropiedades/<?php echo $propiedad->imagen ?? ''; ?>" class="pic-small">
-    <?php } ?>
+    <img
+        id="preview-imagen"
+        src="<?php echo ($propiedad->imagen ?? null) ? '/imagenes/imagenesPropiedades/' . $propiedad->imagen : ''; ?>"
+        class="pic-small"
+        <?php echo ($propiedad->imagen ?? null) ? '' : 'hidden'; ?>
+        alt="Vista previa de la imagen de la propiedad"
+    >
 
     <label for="descripcion">Descripción:</label>
     <textarea id="descripcion" name="propiedad[descripcion]" placeholder="Escribe aquí..."><?php echo s($propiedad->descripcion ?? ''); ?></textarea>
@@ -71,3 +75,27 @@
         <?php } ?>
     </select>
 </fieldset>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const input = document.getElementById('imagen');
+    const preview = document.getElementById('preview-imagen');
+
+    if (!input || !preview) {
+        return;
+    }
+
+    input.addEventListener('change', () => {
+        const [file] = input.files;
+
+        if (!file) {
+            return;
+        }
+
+        const url = URL.createObjectURL(file);
+        preview.src = url;
+        preview.hidden = false;
+        preview.onload = () => URL.revokeObjectURL(url);
+    });
+});
+</script>
