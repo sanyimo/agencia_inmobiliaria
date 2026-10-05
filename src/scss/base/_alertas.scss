@@ -1,0 +1,31 @@
+@use 'sass:color';
+@use 'variables' as v;
+@use 'mixins' as m;
+
+.alerta {
+    padding: .5rem;
+    text-align: center;
+    font-weight: v.$bold;
+    text-transform: uppercase;
+    margin: 1rem 0;
+
+    @include m.tablet {
+        width: 60%;
+        margin-left: 20%;
+    }
+
+    &__error {
+        background-color: #f8aaaa;
+        color: #e20101;
+        border: solid 3px color.adjust(#e20101, $lightness: +6%);
+        border-radius: 1rem;
+        text-shadow: v.$grisOscuro 1px 0.5px;
+    }
+
+    &__exito {
+        background-color: color.adjust(v.$grisOscuro, $lightness: +8%);
+        color: v.$amarillo;
+        border: solid 3px v.$gris;
+        border-radius: 1rem;
+    }
+}

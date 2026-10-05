@@ -1,0 +1,37 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+.seccion {
+    margin-top: calc(v.$separacion / 2);
+    margin-bottom: calc(v.$separacion / 2);
+}
+.contenido-centrado {
+    max-width: 80rem;
+}
+.alinear-derecha {
+    display: flex;
+    justify-content: flex-end;
+}
+.w-100 {
+    width: 100%;
+}
+.admin-nav {
+    @include m.grid(1, 1rem);
+    
+    @include m.tablet {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+.admin-opt {
+    @include m.grid(1, 1rem);
+    margin: 5rem 2rem;
+    
+    @include m.tablet {
+            grid-template-columns: repeat(2, 1fr);
+        }
+}
+#hoydia {
+    text-align: right;
+    color: v.$amarillo;
+    font-size: 2rem;
+}

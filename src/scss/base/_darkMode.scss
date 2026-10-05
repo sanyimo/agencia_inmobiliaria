@@ -1,0 +1,99 @@
+@use 'sass:color';
+@use 'variables' as v;
+@use 'mixins' as m;
+
+.dark-mode {
+    background-color: color.adjust(v.$grisOscuro, $lightness: -10%);
+    //transition: background-color 0.5s;
+
+    p:not(.precio) {
+        color: v.$blanco;
+    }
+
+    h1,h2,h3,h4  {
+        color: v.$gris;
+    }
+    .amarillo {
+        color: v.$amarillo;
+    }
+    .boton-amarillo {
+        @include m.boton(color.adjust(v.$naranja, $lightness: -6%), inline-block);
+    }
+    
+    .boton-amarillo-block {
+        @include m.boton(color.adjust(v.$naranja, $lightness: -6%), block);
+    }
+    .boton-verde {
+        @include m.boton(v.$amarillo, inline-block);
+    }
+    .imagen-contacto h2 {
+        color: v.$gris;
+    }
+    .entrada-blog {
+        margin-bottom: 2rem;
+    }
+    .testimonial {
+        background-color: v.$amarillo;
+    }
+    .anuncio, 
+    .resumen-propiedad,
+    .gris {
+        background-color: v.$grisOscuro;
+        border: 1px solid v.$grisOscuro;
+
+        .precio {
+            color: v.$amarillo;
+        }
+        .icono {
+            filter: invert(100%);
+        }
+    }
+    .formulario fieldset {
+            background-color: color.adjust(v.$grisOscuro, $lightness: -7%);
+        }
+    
+    .texto-nosotros blockquote {
+        color: v.$blanco;
+    }
+    .informacion-meta {
+        span {
+            color: v.$naranja;
+        }
+    }
+    .texto-entrada h4:after {
+        background-color: v.$amarillo;
+    }
+    
+    .formulario {
+        label,
+        legend,
+        p {
+            color: v.$blanco;
+        }
+
+        input:not([type="submit"]), 
+        textarea,
+        select {
+            background-color: v.$grisOscuro;
+            border: 1px solid v.$grisOscuro;
+            color: v.$blanco;
+        }
+    }
+    table.propiedades {
+        thead {
+            background-color: color.adjust(v.$grisOscuro, $lightness: +10%);
+            border: 1px solid v.$gris;
+
+        }
+        tr:nth-child(2n) {
+            background-color: color.adjust(v.$grisOscuro, $lightness: -8%);
+
+        }
+        &:nth-child(2n+1) {
+            background-color: color.adjust(v.$grisOscuro, $lightness: -4%);
+        }
+        td {
+            color: v.$blanco;
+        }
+    }
+}

@@ -1,0 +1,65 @@
+@use 'sass:color';
+@use '../base/variables' as v;
+@use '../base/mixins' as m;
+
+@include m.tablet {
+    .seccion-inferior {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        column-gap: 2rem;
+    }
+}
+
+.entrada-blog {
+    margin-bottom: 2rem;
+    
+    @include m.tablet {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        column-gap: 2rem;
+    }
+    &:last-of-type {
+        margin-bottom: 0;
+        border-bottom: none;
+    }
+}
+
+.informacion-meta {
+    span {
+        color: v.$amarillo;
+    }
+}
+
+.texto-entrada {
+    a {
+        color: v.$negro;
+        margin-top: 2rem;
+        display: block;
+        @include m.tablet {
+            margin-top: 0;
+        }
+    }
+    h4 {
+        margin: 0;
+        line-height: 1.4;
+        &::after {
+            content: '';
+            display: block;
+            width: 25rem;
+            height: .5rem;
+            background-color: v.$teja;
+            margin-top: 1rem;
+        }
+    }
+
+}
+.amarillo {
+    color: v.$amarillo;
+}
+.gris {
+    background-color: color.adjust(v.$gris, $lightness: +9%);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    border-bottom:  0.2rem solid color.adjust(v.$gris, $lightness: +5%);
+    margin: 0;
+}

@@ -1,0 +1,61 @@
+@use 'sass:color';  
+@use '../base/variables' as v;
+@use '../base/mixins' as m;
+
+@include m.tablet {
+    .contenedor-anuncios {
+        @include m.grid(2, 2rem);
+    }
+}
+@include m.desktop {
+    .contenedor-anuncios {
+        @include m.grid(3, 2rem);
+    }
+}
+
+
+.anuncio {
+    background-color: color.adjust(v.$gris, $lightness: +5%);
+    border-radius: 1rem;
+    border-bottom: 1px solid color.adjust(v.$gris, $lightness: -8%);
+    margin-bottom: 2rem;
+
+    .contenido-anuncio {
+        padding: 1rem;
+    }
+
+    h3, p {
+        margin: 0;
+    }
+ 
+}
+.precio {
+    color: v.$amarillo;
+    font-weight: v.$bold;
+    font-size: 3rem;
+}
+
+.iconos-caracteristicas {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    
+    li {
+        flex: 1;
+        display: flex;
+        
+        img {
+            flex:  0 0 2rem;
+            margin-right: 0.6rem;
+            
+            @include m.tablet {
+                max-width: 10rem;
+            }
+        }
+        p {
+            font-weight: v.$black;
+        }
+        
+    }
+    
+}

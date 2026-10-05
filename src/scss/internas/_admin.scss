@@ -1,0 +1,40 @@
+@use 'sass:color';
+@use '../base/variables' as v;
+
+table.propiedades {
+    margin-top: 5rem;
+    width: 100%;
+    border-spacing: 0;   
+
+    thead {
+        background-color: v.$grisRaton;
+
+        th {
+            color: v.$blanco;
+            padding: 2rem;
+            
+        }
+        
+    }
+    td {
+        text-align: center;
+        align-items: center;
+            
+        }
+    tr:nth-child(2n) {
+        background-color: color.adjust(v.$gris, $lightness: +7%);
+        
+    }
+
+    .imagen-tabla {
+        width: 12rem;
+    }
+
+}
+
+.pic-small {
+    width: 30rem;
+}
+.tabla-contenido {
+    visibility: hidden;
+}

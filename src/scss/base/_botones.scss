@@ -1,0 +1,42 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+.boton-amarillo {
+    @include m.boton(v.$amarillo, inline-block);
+}
+
+.boton-amarillo-block {
+    @include m.boton(v.$amarillo, block);
+    
+    input {
+        border: none;
+        background: none;
+        color: transparent;
+    }
+}
+
+.boton-verde {
+    @include m.boton(v.$teja, inline-block);
+}
+.boton-gris-block {
+    @include m.boton(v.$grisRaton, block);
+    i {
+        position: absolute;
+        margin-top: 1rem;
+        margin-left: 3rem;
+    }
+    input {
+        border: none;
+        background: none;
+        color: transparent;
+        
+    }
+    :hover {
+       cursor: pointer; 
+    }
+    
+    width: 100%;
+ }
+ .boton-verde-block {
+     @include m.boton(v.$teja, block);
+ }
