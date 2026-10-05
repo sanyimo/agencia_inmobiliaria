@@ -90,6 +90,20 @@ function idiomaActual(): string {
     if (isset($_GET['lang']) && in_array($_GET['lang'], ['es', 'en'], true)) $_SESSION['idioma'] = $_GET['lang'];
     return $_SESSION['idioma'] ?? 'es';
 }
+function enlaceIdioma(string $idioma): string {
+    $ruta = $_SERVER['REQUEST_URI'] ?? '/';
+    $partes = parse_url($ruta);
+    $parametros = [];
+
+    if(isset($partes['query'])) {
+        parse_str($partes['query'], $parametros);
+    }
+
+    $parametros['lang'] = $idioma;
+
+    return ($partes['path'] ?? '/') . '?' . http_build_query($parametros);
+}
+
 function t(string $texto): string {
     $traducciones = [
         'Nosotros'=>'About us','Anuncios'=>'Listings','Contacto'=>'Contact','Cerrar sesión'=>'Log out',
@@ -114,7 +128,19 @@ function t(string $texto): string {
         'Escrito el:'=>'Written on:','por:'=>'by:','Guía para la decoración de tu hogar'=>'Guide to decorating your home',
         'Terraza en el techo de tu casa'=>'Rooftop terrace for your home','Nos destaca'=>'Why choose us',
         'Modo demo: los cambios que realices no se guardarán en la base de datos.'=>'Demo mode: changes you make will not be saved to the database.',
-        'Todos los derechos reservados'=>'All rights reserved'
+        'Todos los derechos reservados'=>'All rights reserved',
+        'Blog'=>'Blog','Admin'=>'Admin','Venta de casas y apartamentos exclusivos de lujo'=>'Luxury homes and apartments for sale',
+        'Más sobre nosotros'=>'More about us','Casas y apartamentos en venta'=>'Houses and apartments for sale',
+        'Ver todas'=>'View all','Encuentra la casa de tus sueños'=>'Find your dream home',
+        'Llena el formulario de contacto y un asesor se pondrá en contacto contigo a la mayor brevedad'=>'Fill out the contact form and an advisor will get in touch with you as soon as possible',
+        'Contactános'=>'Contact us','Nuestro Blog'=>'Our Blog','Testimoniales'=>'Testimonials',
+        'Ver propiedad'=>'View property','25 Años de experiencia'=>'25 years of experience',
+        'Sobre Nosotros'=>'About us','Llene el formulario de contacto'=>'Fill out the contact form',
+        'Nombre'=>'Name','Nombre:'=>'Name:','Escriba aquí...'=>'Write here...','-- Seleccione --'=>'-- Select --',
+        'Información sobre la propiedad'=>'Property information','Imagen Contacto'=>'Contact image',
+        'Texto Entrada Blog'=>'Blog entry text','Texto entrada blog'=>'Blog entry text',
+        'imagen de la propiedad'=>'property image'
+    ];
     ];
     return idiomaActual() === 'en' ? ($traducciones[$texto] ?? $texto) : $texto;
 }

@@ -136,3 +136,31 @@
     opacity: 1;
     height: auto;
 }
+.selector-idioma {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .7rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+
+    @include m.tablet {
+        margin-bottom: 1rem;
+    }
+
+    a {
+        margin-right: 0;
+        font-size: 1.4rem;
+        color: v.$blanco;
+        text-decoration: none;
+
+        &:hover,
+        &.activo {
+            color: v.$amarillo;
+        }
+    }
+
+    span {
+        color: v.$blanco;
+    }
+}
