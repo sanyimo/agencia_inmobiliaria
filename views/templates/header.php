@@ -18,6 +18,7 @@
                     <a href="/blog">Blog</a>
                     <a href="/contacto">Contacto</a>
                     <?php if($auth): ?>
+                        <a class="admin-link" href="/admin">Admin</a>
                         <a href="/logout"><span class="amarillo">Cerrar sesión</span></a>
                     <?php endif; ?>
                 </nav>

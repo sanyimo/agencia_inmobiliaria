@@ -11,9 +11,17 @@ function darkMode() {
     const iconoDarkMode = botonDarkMode.querySelector('img');
 
     function actualizarIcono() {
-        iconoDarkMode.src = document.body.classList.contains('dark-mode')
+        const modoOscuro = document.body.classList.contains('dark-mode');
+
+        iconoDarkMode.src = modoOscuro
             ? '/build/img/sun-solid.svg'
             : '/build/img/dark-mode.svg';
+
+        botonDarkMode.title = modoOscuro
+            ? 'Activar modo claro'
+            : 'Activar modo oscuro';
+        
+        botonDarkMode.setAttribute('aria-label', botonDarkMode.title);
     }
 
     if(prefiereDarkMode.matches) {

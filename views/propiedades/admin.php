@@ -3,7 +3,7 @@
     <h1 class="amarillo"><?php echo $titulo ?? 'Administración de propiedades'; ?></h1>
     
     <div class="admin-nav">
-        <a href="/admin" class=" boton-amarillo"><i class="fa-solid fa-arrow-rotate-left"></i> ADMIN</a>
+        <a href="/admin" class=" boton-amarillo"><i class="fa-solid fa-arrow-left"></i> ADMIN</a>
         <a href="/propiedades/crear" class=" boton-verde"><i class="fa-solid fa-arrow-down"></i> Nueva propiedad</a>
         <a href="/vendedores/admin" class=" boton-amarillo"> Ir a Vendedores <i class="fa-solid fa-arrow-right"></i> </a>
     </div>
