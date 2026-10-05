@@ -9,14 +9,13 @@
 
     <label for="imagen">Imagen:</label>
     <input type="file"
-    id="imagen" accept="image/webp, image/avif, image/jpeg, image/png" name="propiedad[imagen]">
+        id="imagen" accept="image/webp, image/avif, image/jpeg, image/png" name="propiedad[imagen]">
     <img
         id="preview-imagen"
-        src="<?php echo ($propiedad->imagen ?? null) ? '/imagenes/imagenesPropiedades/' . $propiedad->imagen : ''; ?>"
+        src="<?php echo isset($propiedad) && !empty($propiedad->imagen) ? '/imagenes/imagenesPropiedades/' . $propiedad->imagen : ''; ?>"
         class="pic-small"
         <?php echo ($propiedad->imagen ?? null) ? '' : 'hidden'; ?>
-        alt="Vista previa de la imagen de la propiedad"
-    >
+        alt="Vista previa de la imagen de la propiedad">
 
     <label for="descripcion">Descripción:</label>
     <textarea id="descripcion" name="propiedad[descripcion]" placeholder="Escribe aquí..."><?php echo s($propiedad->descripcion ?? ''); ?></textarea>
@@ -27,41 +26,41 @@
     <legend>Información propiedad</legend>
 
     <label for="habitaciones">Superficie (&#13217;):</label>
-    <input 
-        type="number" 
-        id="superficie" 
-        name="propiedad[superficie]" 
-        placeholder="Ej: 80" 
-        min="10" 
-        max="10000" 
+    <input
+        type="number"
+        id="superficie"
+        name="propiedad[superficie]"
+        placeholder="Ej: 80"
+        min="10"
+        max="10000"
         value="<?php echo s($propiedad->superficie ?? ''); ?>">
 
     <label for="habitaciones">Habitaciones:</label>
-    <input 
-        type="number" 
-        id="habitaciones" 
-        name="propiedad[habitaciones]" 
-        placeholder="Ej: 3" 
-        min="1" 
-        max="10" 
+    <input
+        type="number"
+        id="habitaciones"
+        name="propiedad[habitaciones]"
+        placeholder="Ej: 3"
+        min="1"
+        max="10"
         value="<?php echo s($propiedad->habitaciones ?? ''); ?>">
 
     <label for="wc">Baños:</label>
-    <input 
-        type="number" 
-        id="wc" 
-        name="propiedad[wc]" 
-        placeholder="Ej: 3" 
-        min="0" max="10" 
+    <input
+        type="number"
+        id="wc"
+        name="propiedad[wc]"
+        placeholder="Ej: 3"
+        min="0" max="10"
         value="<?php echo s($propiedad->wc ?? ''); ?>">
 
     <label for="aparcamiento">Aparcamiento:</label>
-    <input 
-        type="number" 
-        id="aparcamiento" 
-        name="propiedad[aparcamiento]" 
-        placeholder="de 0 a 10" 
-        min="0" max="10" 
+    <input
+        type="number"
+        id="aparcamiento"
+        name="propiedad[aparcamiento]"
+        placeholder="de 0 a 10"
+        min="0" max="10"
         value="<?php echo s($propiedad->aparcamiento ?? ''); ?>">
 </fieldset>
 
@@ -77,25 +76,25 @@
 </fieldset>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    const input = document.getElementById('imagen');
-    const preview = document.getElementById('preview-imagen');
+    document.addEventListener('DOMContentLoaded', () => {
+        const input = document.getElementById('imagen');
+        const preview = document.getElementById('preview-imagen');
 
-    if (!input || !preview) {
-        return;
-    }
-
-    input.addEventListener('change', () => {
-        const [file] = input.files;
-
-        if (!file) {
+        if (!input || !preview) {
             return;
         }
 
-        const url = URL.createObjectURL(file);
-        preview.src = url;
-        preview.hidden = false;
-        preview.onload = () => URL.revokeObjectURL(url);
+        input.addEventListener('change', () => {
+            const [file] = input.files;
+
+            if (!file) {
+                return;
+            }
+
+            const url = URL.createObjectURL(file);
+            preview.src = url;
+            preview.hidden = false;
+            preview.onload = () => URL.revokeObjectURL(url);
+        });
     });
-});
 </script>

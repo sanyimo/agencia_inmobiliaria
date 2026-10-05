@@ -8,6 +8,6 @@
         </nav>
     </div>
     
-    <p class="copyright">Todos los derechos reservados <?php
-    echo date('Y'); ?>&copy;</p>
+    <p class="copyright">Todos los derechos reservados &copy; <?php
+    echo date('Y'); ?></p>
 </footer>
