@@ -54,7 +54,8 @@
 
 }
 .amarillo {
-    color: v.$amarillo;
+    color: v.$naranja;
+    text-shadow: 0px 0px 1px v.$negro;
 }
 .gris {
     background-color: color.adjust(v.$gris, $lightness: +9%);
