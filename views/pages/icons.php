@@ -1,17 +1,17 @@
-<div class="iconos-nosotros">
-    <div class="icono gris">
-        <img src="build/img/icono_candado.svg" alt="Icono seguridad" loading="lazy">
-        <h3>Seguridad</h3>
+<div class="icons-aboutUs">
+    <div class="icon gray">
+        <img src="build/img/icono_candado.svg" alt="<?php echo t('Icono seguridad'); ?>" loading="lazy">
+        <h3><?php echo t('Seguridad'); ?></h3>
         <p>Possimus, suscipit repudiandae. Autem deserunt aliquid deleniti sit minus consectetur obcaecati molestiae dolorem natus dolores reiciendis tempore, explicabo cum nobis laudantium. Voluptates?</p>
     </div>
-    <div class="icono gris">
-        <img src="build/img/icono_dolar.svg" alt="Icono Precio" loading="lazy">
-        <h3>Precio</h3>
+    <div class="icon gray">
+        <img src="build/img/icono_dolar.svg" alt="<?php echo t('Icono precio'); ?>" loading="lazy">
+        <h3><?php echo t('Precio'); ?></h3>
         <p>Possimus, suscipit repudiandae. Autem deserunt aliquid deleniti sit minus consectetur obcaecati molestiae dolorem natus dolores reiciendis tempore, explicabo cum nobis laudantium. Voluptates?</p>
     </div>
-    <div class="icono gris">
-        <img src="build/img/icono_reloj.svg" alt="Icono Tiempo" loading="lazy">
-        <h3>A tiempo</h3>
+    <div class="icon gray">
+        <img src="build/img/icono_reloj.svg" alt="<?php echo t('Icono tiempo'); ?>" loading="lazy">
+        <h3><?php echo t('A tiempo'); ?></h3>
         <p>Possimus, suscipit repudiandae. Autem deserunt aliquid deleniti sit minus consectetur obcaecati molestiae dolorem natus dolores reiciendis tempore, explicabo cum nobis laudantium. Voluptates?</p>
     </div>
 </div>
