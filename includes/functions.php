@@ -171,7 +171,8 @@ function t(string $text): string
         'Fecha y hora'=>'Date and time',
         'Tienes un nuevo mensaje'=>'You have a new message',
         'Vende o Compra'=>'Sell or Buy',
-        'Presupuesto o Precio'=>'Budget or Price', 
+        'Presupuesto o Precio'=>'Budget or Price',
+        'Página principal'=>'Main Page'
     ];
     return currentLanguage() === 'en' ? ($translations[$text] ?? $text) : $text;
 }

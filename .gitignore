@@ -2,9 +2,11 @@
 node_modules
 vendor/
 
-src/
-usuario.php
+public/build/css/
+public/build/js/
+user.php
 *.env
 *.dump
 *.sql
 .htaccess
+modernizr.js
