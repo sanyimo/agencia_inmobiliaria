@@ -1,0 +1,46 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+.btn-yellow {
+    @include m.btn(v.$creme, inline-block);
+}
+
+.btn-yellow-block {
+    @include m.btn(v.$creme, block);
+    
+    input {
+        border: none;
+        background: none;
+        color: transparent;
+    }
+}
+
+.btn-roof {
+    @include m.btn(v.$roof, inline-block);
+}
+
+.btn-gray-block {
+    @include m.btn(v.$mouseGray, block);
+    
+    i {
+        position: absolute;
+        margin-top: 1rem;
+        margin-left: 3rem;
+    }
+
+    input {
+        border: none;
+        background: none;
+        color: transparent;
+    }
+
+    :hover {
+       cursor: pointer; 
+    }
+    
+    width: 100%;
+ }
+
+ .btn-roof-block {
+     @include m.btn(v.$roof, block);
+ }

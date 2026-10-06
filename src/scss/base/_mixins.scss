@@ -1,0 +1,68 @@
+@use 'sass:color';
+@use 'variables' as v;
+
+
+@mixin mobile {
+    @media (min-width: v.$mobile) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (min-width: v.$tablet) {
+        @content;
+    }
+}
+  
+@mixin desktop {
+    @media (min-width: v.$desktop) {
+        @content;
+    }
+}
+
+@mixin xl_desktop {
+    @media (min-width: v.$xl_desktop) {
+        @content;
+    }
+}
+
+@mixin grid($columns, $spacing ) {
+    display: grid;
+    gap: $spacing;
+    grid-template-columns: repeat($columns, 1fr);
+}
+
+@mixin btn($bgColor, $display ) {
+    background-color: $bgColor;
+    color: v.$white;
+    font-size: 1.8rem;
+    text-shadow: 1px 1px #444;
+    font-weight: v.$bold;
+    text-decoration: none;
+    padding: 1rem 3rem;
+    text-align: center;
+    margin-top: 1rem;
+    display: $display;
+    border: none;
+
+    &:hover {
+        background-color: color.adjust($bgColor, $lightness: -5%);
+        cursor: pointer;
+    }
+}
+
+.container {
+    width: 95%;
+    max-width: 120rem;
+    margin: 0 auto;
+}
+
+@mixin container-md {
+    width: min(95%, 80rem);
+    margin: 0 auto;
+}
+
+@mixin container-sm {
+    width: min(95%, 60rem);
+    margin: 0 auto;
+}

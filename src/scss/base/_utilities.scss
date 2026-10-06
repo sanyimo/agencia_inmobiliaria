@@ -1,0 +1,44 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+
+.section {
+    margin-top: calc(v.$separation / 2);
+    margin-bottom: calc(v.$separation / 2);
+}
+
+.content-centered {
+    max-width: 80rem;
+}
+
+.align-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.admin-nav {
+    @include m.grid(1, 1rem);
+    
+    @include m.tablet {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.admin-opt {
+    @include m.grid(1, 1rem);
+    margin: 5rem 2rem;
+    
+    @include m.tablet {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+#today {
+    text-align: right;
+    color: v.$creme;
+    font-size: 2rem;
+}
