@@ -1,6 +1,7 @@
-<?php 
+<?php
 
-function conectarDB() : mysqli {
+function connectDB(): mysqli
+{
     $db = new mysqli(
         $_ENV['DB_HOST'], 
         $_ENV['DB_USER'], 
@@ -10,11 +11,10 @@ function conectarDB() : mysqli {
     );
 
     if(!$db) {
-        echo "Error, no se pudo conectar";
+        echo t('Error, no se pudo conectar');
         exit;
     }
     $db->set_charset('utf8');
     
     return $db;
-    
 }
