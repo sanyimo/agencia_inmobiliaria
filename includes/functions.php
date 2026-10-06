@@ -1,17 +1,20 @@
 <?php
 define('TEMPLATES_URL', __DIR__ . '/templates');
-define('FUNCIONES_URL', __DIR__ . 'funciones.php');
-define('CARPETA_IMAGENES', $_SERVER['DOCUMENT_ROOT'] . '/imagenes/imagenesPropiedades/');
-define('CARPETA_VENDEDORES', $_SERVER['DOCUMENT_ROOT'] . '/imagenes/imagenesVendedores/');
+define('FUNCTIONS_URL', __DIR__ . 'functions.php');
+define('FOLDER_IMAGES', $_SERVER['DOCUMENT_ROOT'] . '/images/imagesProperties/');
+define('FOLDER_SELLERS', $_SERVER['DOCUMENT_ROOT'] . '/images/imagesSellers/');
 
-function estaAutenticado() {
+function isAuthenticated()
+{
     session_start();
 
     if(!$_SESSION['login']) {
         header('Location: /');
     }
 }
-function debuguear(mixed $variable): void {
+
+function debug(mixed $variable): void
+{
     echo "<pre>";
     var_dump($variable);
     echo "</pre>";
@@ -25,9 +28,10 @@ function s(string $html): string {
 
 
 // Valida tipo de petición
-function validarTipoContenido(string $tipo): bool {
-    $tipos = ['vendedor', 'propiedad'];
-    return in_array($tipo, $tipos, true);
+function validateContentType(string $type): bool
+{
+    $types = ['seller', 'propiedad'];
+    return in_array($type, $types, true);
 }
 
 // Muestra los mensajes
@@ -35,31 +39,32 @@ function validarTipoContenido(string $tipo): bool {
     $mensaje = '';
     switch ($codigo) {
         case 1:
-            $mensaje = 'Propiedad creada correctamente';
+            $message = 'Propiedad creada correctamente';
             break;
         case 2:
-            $mensaje = 'Propiedad actualizada correctamente';
+            $message = 'Propiedad actualizada correctamente';
             break;
         case 3:
-            $mensaje = 'Propiedad eliminada correctamente';
+            $message = 'Propiedad eliminada correctamente';
             break;
         case 4:
-            $mensaje = 'Vendedor/a registrado/a correctamente';
+            $message = 'Vendedor/a registrado/a correctamente';
             break;
         case 5:
-            $mensaje = 'Vendedor/a actualizado/a correctamente';
+            $message = 'Vendedor/a actualizado/a correctamente';
             break;
         case 6:
-            $mensaje = 'Vendedor/a eliminado/a correctamente';
+            $message = 'Vendedor/a eliminado/a correctamente';
             break;
         default:
-            $mensaje = false;
+            $message = false;
             break;
     }
-    return $mensaje;
+    return $message;
 }*/
 
-function validarORedireccionar(string $url) {
+function validateOrRedirect(string $url)
+{
     $id = $_GET['id'];
     $id = filter_var($id, FILTER_VALIDATE_INT);
 
@@ -69,43 +74,47 @@ function validarORedireccionar(string $url) {
 
     return $id;
 }
-function fechaHora() {
+function dateTime()
+{
     setlocale(LC_ALL, 'es_ES');
     date_default_timezone_set('Europe/Madrid');
-    $bMeses = array("void","Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
+    $bMonths = array("void", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
 
-    $bDias = array("Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado");
-    $fecha = getdate();
-    
-    $dias = $bDias[$fecha["wday"]];
-    $meses = $bMeses[$fecha["mon"]];
-    $hora = date('H:i');
+    $bDays = array("Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado");
+    $date = getdate();
 
-    $actual = $dias . ", " . $fecha["mday"] ." de ". $meses . " de ". $fecha["year"] . " <br>  " . $hora;
+    $days = $bDays[$date["wday"]];
+    $months = $bMonths[$date["mon"]];
+    $hour = date('H:i');
 
-    return $actual;
+    $current = $days . ", " . $date["mday"] . " de " . $months . " de " . $date["year"] . " <br>  " . $hour;
+
+    return $current;
 }
-function idiomaActual(): string {
+function currentLanguage(): string
+{
     if (session_status() !== PHP_SESSION_ACTIVE) session_start();
-    if (isset($_GET['lang']) && in_array($_GET['lang'], ['es', 'en'], true)) $_SESSION['idioma'] = $_GET['lang'];
-    return $_SESSION['idioma'] ?? 'es';
+    if (isset($_GET['lang']) && in_array($_GET['lang'], ['es', 'en'], true)) $_SESSION['language'] = $_GET['lang'];
+    return $_SESSION['language'] ?? 'es';
 }
-function enlaceIdioma(string $idioma): string {
-    $ruta = $_SERVER['REQUEST_URI'] ?? '/';
-    $partes = parse_url($ruta);
-    $parametros = [];
+function langRoute(string $language): string
+{
+    $route = $_SERVER['REQUEST_URI'] ?? '/';
+    $parts = parse_url($route);
+    $parameters = [];
 
-    if(isset($partes['query'])) {
-        parse_str($partes['query'], $parametros);
+    if (isset($parts['query'])) {
+        parse_str($parts['query'], $parameters);
     }
 
-    $parametros['lang'] = $idioma;
+    $parameters['lang'] = $language;
 
-    return ($partes['path'] ?? '/') . '?' . http_build_query($parametros);
+    return ($parts['path'] ?? '/') . '?' . http_build_query($parameters);
 }
 
-function t(string $texto): string {
-    $traducciones = [
+function t(string $text): string
+{
+    $translations = [
         'Nosotros'=>'About us','Anuncios'=>'Listings','Contacto'=>'Contact','Cerrar sesión'=>'Log out',
         'Iniciar sesión'=>'Log in','Correo electrónico y contraseña'=>'Email and password','E-mail'=>'Email',
         'Tu e-mail'=>'Your email','Contraseña'=>'Password','Tu contraseña'=>'Your password',
@@ -141,5 +150,5 @@ function t(string $texto): string {
         'Texto Entrada Blog'=>'Blog entry text','Texto entrada blog'=>'Blog entry text',
         'imagen de la propiedad'=>'property image'
     ];
-    return idiomaActual() === 'en' ? ($traducciones[$texto] ?? $texto) : $texto;
+    return currentLanguage() === 'en' ? ($translations[$text] ?? $text) : $text;
 }

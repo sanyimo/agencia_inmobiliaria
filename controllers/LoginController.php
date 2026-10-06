@@ -6,14 +6,14 @@ use Model\Admin;
 
 class LoginController {
     public static function login(Router $router) {
-        $alertas = []; 
+        $alerts = [];
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = $_POST['email'] ?? '';
             $password = $_POST['password'] ?? '';
 
             if($email === 'demo@demo.com' && $password === 'demo1234') {
-                $_SESSION['usuario'] = $email;
+                $_SESSION['user'] = $email;
                 $_SESSION['login'] = true;
                 $_SESSION['demo'] = true;
                 header('Location: /admin');
@@ -21,27 +21,27 @@ class LoginController {
             }
 
             $auth = new Admin($_POST);
-            $alertas = $auth->validar();
+            $alerts = $auth->validate();
 
-            if (empty($alertas)) {
+            if (empty($alerts)) {
                 //verificar si existe usuario o no
-                $resultado = $auth->existeUsuario();
-                if( !$resultado ) {
-                    $alertas = Admin::getAlertas();
+                $result = $auth->userExists();
+                if (!$result) {
+                    $alerts = Admin::getAlerts();
                 } else {
-                    $autenticado = $auth->comprobarPassword($resultado);
-                    if($autenticado) {
-                       $auth->autenticar();
+                    $authenticated = $auth->checkPassword($result);
+                    if ($authenticated) {
+                        $auth->authenticate();
                     } else {
-                        $alertas = Admin::getAlertas();
+                        $alerts = Admin::getAlerts();
                     }
                 }
             }
         }
         
         $router->render('auth/login', [
-            'titulo' => 'Iniciar sesión',
-            'alertas' => $alertas
+            'header' => 'Iniciar sesión',
+            'alerts' => $alerts
         ]); 
     }
     public static function logout(Router $router) {

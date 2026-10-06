@@ -6,8 +6,8 @@ namespace Model;
 class Admin extends ActiveRecord
 {
 
-    protected static $tabla = 'usuarios';
-    protected static $columnasDB = ['id', 'email', 'password'];
+    protected static $table = 'users';
+    protected static $columnsDB = ['id', 'email', 'password'];
 
     public ?int $id = null;
     public string $email;
@@ -20,63 +20,63 @@ class Admin extends ActiveRecord
         $this->password = $args['password'] ?? '';
     }
 
-    public function validar()
+    public function validate()
     {
         if (!$this->email) {
-            self::$alertas['error'][] = "El correo electrónico no es válido";
+            self::$alerts['error'][] = "El correo electrónico no es válido";
         }
 
         if (!$this->password) {
-            self::$alertas['error'][] = "La contraseña es necesaria";
+            self::$alerts['error'][] = "La contraseña es necesaria";
         }
-        return self::$alertas;
+        return self::$alerts;
     }
-    public function existeUsuario(): ?\mysqli_result
+    public function userExists(): ?\mysqli_result
     {
         // Escapar el email para evitar inyección SQL
         $email = self::$db->real_escape_string($this->email);
 
         // Revisar si el usuario existe o no
-        $query = "SELECT * FROM " . self::$tabla . " WHERE email = '" . $email . "' LIMIT 1";
-        $resultado = self::$db->query($query);
+        $query = "SELECT * FROM " . self::$table . " WHERE email = '" . $email . "' LIMIT 1";
+        $result = self::$db->query($query);
 
-        if (!$resultado || $resultado->num_rows === 0) {
-            self::$alertas['error'][] = "Este usuario no existe";
+        if (!$result || $result->num_rows === 0) {
+            self::$alerts['error'][] = "Este usuario no existe";
             return null; // Retornar null para indicar que no se encontró usuario
         }
-        return $resultado;
+        return $result;
     }
-    public function comprobarPassword(?\mysqli_result $resultado): bool
+    public function checkPassword(?\mysqli_result $result): bool
     {
-        if (!$resultado) {
+        if (!$result) {
             return false; // Si no hay resultado, retornar false directamente
         }
 
         // Obtener el usuario de la consulta
-        $usuario = $resultado->fetch_object();
+        $user = $result->fetch_object();
 
-        if (!$usuario) {
-            self::$alertas['error'][] = "Usuario no encontrado";
+        if (!$user) {
+            self::$alerts['error'][] = "Usuario no encontrado";
             return false;
         }
 
         // Verificar si el password es correcto
-        if (!password_verify($this->password, $usuario->password)) {
-            self::$alertas['error'][] = 'Contraseña incorrecta';
+        if (!password_verify($this->password, $user->password)) {
+            self::$alerts['error'][] = 'Contraseña incorrecta';
             return false;
         }
 
         return true; // La contraseña es correcta
     }
 
-    public function autenticar(): void
+    public function authenticate(): void
     {
-        // El usuario esta autenticado
+        // El usuario esta authenticated
         session_start();
 
         // Llenar el arreglo de la sesión
         //ROLES????
-        $_SESSION['usuario'] = $this->email;
+        $_SESSION['user'] = $this->email;
         $_SESSION['login'] = true;
 
         header('Location: /admin');

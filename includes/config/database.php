@@ -1,6 +1,7 @@
-<?php 
+<?php
 
-function conectarDB() : mysqli {
+function connectDB(): mysqli
+{
     $db = new mysqli(
         $_ENV['DB_HOST'], 
         $_ENV['DB_USER'], 
