@@ -11,33 +11,37 @@ $seller->email ??= '';
 ?>
 
 <fieldset>
-    <legend>Información general</legend>
-    <label for="image">Imagen:</label>
-    <input type="file"
-        id="image" accept="image/webp, image/avif, image/jpeg, image/png" name="seller[image]">
-    <img
-        id="preview-image"
-        src="<?php echo $seller->image ? '/images/imagesSellers/' . $seller->image : ''; ?>"
-        class="pic-small"
-        <?php echo $seller->image ? '' : 'hidden'; ?>
-        alt="Vista previa de la imagen del vendedor">
+    <legend><?php echo t('Información general'); ?></legend>
+    <label for="image"><?php echo t('Imagen'); ?></label>
+    <input type="file" id="image" accept="image/webp, image/avif, image/jpeg, image/png" name="seller[image]">
+    <img id="preview-image" src="<?php echo $seller->image ? '/images/imagesSellers/' . $seller->image : ''; ?>"
+        class="pic-small" <?php echo $seller->image ? '' : 'hidden'; ?>
+        alt="<?php echo t('Vista previa imagen de vendedor/a'); ?>">
 
-    <label for="name">Nombre:</label>
-    <input type="text" id="name" name="seller[name]" placeholder="Nombre vendedor" value="<?php echo s($seller->name); ?>">
+    <label for="name"><?php echo t('Nombre'); ?></label>
+    <input type="text" id="name" name="seller[name]" placeholder="<?php echo t('Nombre vendedor/a'); ?>"
+        value="<?php echo s($seller->name); ?>" autocomplete="name">
 
-    <label for="lastName">Apellidos:</label>
-    <input type="text" id="lastName" name="seller[lastName]" placeholder="Apellidos seller" value="<?php echo s($seller->lastName); ?>">
-
+    <label for="lastName"><?php echo t('Apellidos'); ?></label>
+    <input type="text" id="lastName" 
+        name="seller[lastName]" 
+        placeholder="<?php echo t('Apellidos vendedor/a'); ?>"
+        value="<?php echo s($seller->lastName); ?>">
 </fieldset>
 
 <fieldset>
-    <legend>Datos de contacto</legend>
+    <legend><?php echo t('Datos de contacto'); ?></legend>
 
-    <label for="phone">Teléfono:</label>
-    <input type="number" id="phone" name="seller[phone]" class="sample" placeholder="&#xf095;" value="<?php echo s($seller->phone); ?>">
+    <label for="phone"><?php echo t('Teléfono'); ?></label>
+    <input type="number" id="phone" name="seller[phone]" class="sample" placeholder="&#xf095;"
+        value="<?php echo s($seller->phone); ?>" autocomplete="tel">
 
-    <label for="email">E-mail:</label>
-    <input type="email" id="email" name="seller[email]" class="sample" placeholder="&#xf0e0;" value="<?php echo s($seller->email); ?>">
+    <label for="email">E-mail</label>
+    <input type="email" id="email" 
+        name="seller[email]" 
+        class="sample" 
+        placeholder="&#xf0e0;"
+        value="<?php echo s($seller->email); ?>" autocomplete="email">
 </fieldset>
 
 <script>

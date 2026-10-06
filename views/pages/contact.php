@@ -1,6 +1,6 @@
 <main class="container section">
-    <h1 class="creme"><?php echo $header ?? 'Contacto'; ?></h1>
-
+    <?php $header = $header ?? 'Contacto'; ?>
+    <h1 class="creme"><?php echo t($header); ?></h1>
 
     <?php
     $alerts = $alerts ?? [];
@@ -10,45 +10,43 @@
         <source srcset="build/img/destacada3.webp" type="image/webp">
         <source srcset="build/img/destacada3.avif" type="image/avif">
         <source srcset="build/img/destacada3.jpg" type="image/jpeg">
-        <img loading="lazy" src="build/img/destacada3.jpg" alt="Imagen Contacto">
+        <img loading="lazy" src="build/img/destacada3.jpg" alt="<?php echo t('Imagen Contacto'); ?>" width="1200" height="575">
     </picture>
 
-    <h2>Llene el formulario de contacto</h2>
+    <h2><?php echo t('Rellena el formulario de contacto'); ?></h2>
 
     <form class="form" action="/contact" method="POST">
         <fieldset>
-            <legend>Información personal</legend>
+            <legend><?php echo t('Información personal'); ?></legend>
 
-            <label for="name">Nombre</label>
-            <input type="text" placeholder="Nombre" id="name" name="contact[name]" required>
-
+            <label for="name"><?php echo t('Nombre'); ?></label>
+            <input type="text" placeholder="<?php echo t('Nombre'); ?>" id="name" name="contact[name]" autocomplete="off" required>
         </fieldset>
 
         <fieldset>
-            <legend>Información sobre la propiedad</legend>
+            <legend><?php echo t('Información sobre la propiedad'); ?></legend>
 
-            <label for="message">Mensaje:</label>
-            <textarea id="message" name="contact[message]" placeholder="Escriba aquí..." required></textarea>
+            <label for="message"><?php echo t('Mensaje'); ?></label>
+            <textarea id="message" name="contact[message]" placeholder="<?php echo t('Escribe aquí...'); ?>" required></textarea>
 
-            <label for="options">Vende o compra:</label>
+            <label for="options"><?php echo t('Venta o compra'); ?></label>
             <select id="options" name="contact[type]" required>
-                <option value="" disabled selected>-- Seleccione --</option>
-                <option value="COMPRA">Compra</option>
-                <option value="VENDE">Vende</option>
+                <option value="" disabled selected><?php echo t('-- Selecciona --'); ?></option>
+                <option value="COMPRA"><?php echo t('Compra'); ?></option>
+                <option value="VENDE"><?php echo t('Venta'); ?></option>
             </select>
 
-            <label for="budget">Precio o presupuesto</label>
+            <label for="budget"><?php echo t('Precio o presupuesto'); ?></label>
             <input type="number" placeholder="€" id="budget" name="contact[price]" required>
-
         </fieldset>
 
         <fieldset>
-            <legend>Datos de contacto</legend>
+            <legend><?php echo t('Datos de contacto'); ?></legend>
 
-            <p>Cómo desea ser contactado/a</p>
+            <p><?php echo t('Cómo deseas ser contactado/a'); ?></p>
 
             <div class="contact-method">
-                <label for="contact-phone">Teléfono</label>
+                <label for="contact-phone"><?php echo t('Teléfono'); ?></label>
                 <input type="radio" value="phone" id="contact-phone" name="contact[contact]" required>
 
                 <label for="contact-email">E-mail</label>
@@ -57,6 +55,14 @@
             <div id="contact"></div>
         </fieldset>
 
-        <input type="submit" value="Enviar" class="btn-roof">
+        <input type="submit" value=<?php echo t('Enviar'); ?> class="btn-roof">
     </form>
 </main>
+
+<script>
+    const translations = {
+        callDateTime: <?php echo json_encode(t('Elige la fecha y la hora que mejor le convenga para que te llamemos')); ?>,
+        date: <?php echo json_encode(t('Fecha')); ?>,
+        hour: <?php echo json_encode(t('Hora')); ?>
+    };
+</script>

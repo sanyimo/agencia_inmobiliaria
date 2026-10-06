@@ -1,19 +1,22 @@
 <?php
+
 namespace Controllers;
 
 use MVC\Router;
 use Model\Seller;
 use Intervention\Image\ImageManagerStatic as Image;
 
-class SellerController {
-    public static function index(Router $router) {
+class SellerController
+{
+    public static function index(Router $router)
+    {
         $sellers = Seller::all();
 
-        // Muestra mensaje condicional
+        // Display conditional message
         $result = $_GET['result'] ?? null;
 
         $router->render('sellers/admin', [
-            'header' => 'Administrar vendedores',
+            'header' => t('Administración de vendedores'),
             'sellers' => $sellers,
             'result' => $result
         ]);
@@ -23,109 +26,128 @@ class SellerController {
     {
         $seller = new Seller;
 
-        // Consultar para obtener los vendedores
-        $sellers = Seller::all();
-
-        // Arreglo con mensajes de errores
+        // Array containing error messages
         $alerts = Seller::getAlerts();
 
-        // Ejecutar el código después de que el usuario envia el formulario
+        // Execute the code after the user submits the form
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $seller = new Seller($_POST['seller']);
             $image = null;
 
-            // Generar un name único
+            // Generate a unique name
             $sellerImage = md5(uniqid(rand(), true)) . ".webp";
 
-            //setear la image
-            // Realiza un resize de image con Intervention Image
+            // Resize the image using Intervention Image
             if ($_FILES['seller']['tmp_name']['image']) {
                 $image = Image::make($_FILES['seller']['tmp_name']['image'])->fit(800, 600);
                 $seller->setImage($sellerImage);
             }
-            //Validar
+
+            // Validate
             $alerts = $seller->validate();
-            //Revisar que el array de errores esta vacio
+
+            // Check that the error array is empty
             if (empty($alerts)) {
-                // Crear la carpeta para subir images
+
+                // Create the folder to upload images
                 if (!is_dir(FOLDER_SELLERS)) {
                     mkdir(FOLDER_SELLERS);
                 }
-                // Guarda la image en el servidor
+
+                // Save the image to the server
                 if ($image) {
                     $image->save(FOLDER_SELLERS . $sellerImage);
                 }
 
-                // Guarda en la base de datos
+                // Save to the database
                 $seller->guardar();
-                Seller::setAlert('success', 'Ficha creada correctamente');
+
+                Seller::setAlert('success', t('Ficha creada correctamente'));
                 $alerts = Seller::getAlerts();
-                header('Refresh: 0.5; URL=/sellers/admin');
+
+                header('Refresh: 1.5; URL=/sellers/admin');
             }
         }
+
         $router->render('sellers/create', [
-            'header' => 'Registrar nuevo/a vendedor/a',
+            'header' => t('Registrar nuevo/a vendedor/a'),
             'alerts' => $alerts,
             'seller' => $seller
         ]);
     }
-    public static function update(Router $router) {
+
+    public static function update(Router $router)
+    {
         $id = validateOrRedirect('/admin');
-        // Obtener los datos del vendedor
+
+        // Get seller data
         $seller = Seller::find($id);
-        // Arreglo con mensajes de errores
+
+        // Array containing error messages
         $alerts = Seller::getAlerts();
 
-        // Ejecutar el código después de que el usuario envia el formulario
+        // Execute the code after the user submits the form
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Asignar los atributos
+
+            // Assign the attributes
             $args = $_POST['seller'];
             $seller->sync($args);
-            // Validación
+
+            // Validation
             $alerts = $seller->validate();
 
-            // Subida de archivos
+            // File upload
             $image = null;
-            // Generar un name único
+
+            // Generate a unique name
             $sellerImage = md5(uniqid(rand(), true)) . ".webp";
 
             if ($_FILES['seller']['tmp_name']['image']) {
                 $image = Image::make($_FILES['seller']['tmp_name']['image'])->fit(800, 600);
                 $seller->setImage($sellerImage);
             }
-            //Revisar que el array de errores esta vacio
+
+            // Check that the error array is empty
             if (empty($alerts)) {
+
                 if ($image) {
                     $image->save(FOLDER_SELLERS . $sellerImage);
                 }
+
                 $seller->guardar();
-                Seller::setAlert('success', 'Ficha actualizada correctamente');
+
+                Seller::setAlert('success', t('Ficha actualizada correctamente'));
                 $alerts = Seller::getAlerts();
-                header('Refresh: 0.5; URL=/sellers/admin');
+
+                header('Refresh: 1.5; URL=/sellers/admin');
             }
         }
 
         $router->render('sellers/update', [
-            'header' => 'Actualizar ficha de vendedor/a ',
+            'header' => t('Actualizar ficha de vendedor/a'),
             'seller' => $seller,
             'alerts' => $alerts
         ]);
     }
-    public static function delete(Router $router) {
-       
-        // eliminar entrada segun su id
+
+    public static function delete(Router $router)
+    {
+        // Delete entry by ID
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            //validar id
+
+            // Validate ID
             $id = $_POST['id'];
             $id = filter_var($id, FILTER_VALIDATE_INT);
 
-            if($id) {
+            if ($id) {
                 $type = $_POST['type'];
-                // peticiones validas
+
+                // Validate request type
                 if (validateContentType($type)) {
                     $seller = Seller::find($id);
                     $seller->delete();
+
                     header('Location: /sellers/admin');
                 }
             }

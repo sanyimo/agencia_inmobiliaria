@@ -21,17 +21,19 @@
 
 .btn-gray-block {
     @include m.btn(v.$mouseGray, block);
+    
     i {
         position: absolute;
         margin-top: 1rem;
         margin-left: 3rem;
     }
+
     input {
         border: none;
         background: none;
         color: transparent;
-        
     }
+
     :hover {
        cursor: pointer; 
     }

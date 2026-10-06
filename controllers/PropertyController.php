@@ -1,100 +1,122 @@
 <?php
+
 namespace Controllers;
+
 use MVC\Router;
 use Model\Seller;
 use Model\Property;
 use Intervention\Image\ImageManagerStatic as Image;
 
-
 class PropertyController
 {
-    public static function admin(Router $router) {
+    public static function admin(Router $router)
+    {
         $router->render('admin', [
-            'header' => 'Panel de Administración'
+            'header' => t('Panel de Administración')
         ]);
     }
-    public static function index(Router $router) {
+
+    public static function index(Router $router)
+    {
         $properties = Property::all();
-        // Muestra mensaje condicional
+
+        // Display conditional message
         $result = $_GET['result'] ?? null;
 
         $router->render('properties/admin', [
-            'header' => 'Administrador de propiedades',
+            'header' => t('Administrador de propiedades'),
             'properties' => $properties,
             'result' => $result
         ]);
     }
+
     public static function create(Router $router)
     {
         $alerts = Property::getAlerts();
         $property = new Property;
         $sellers = Seller::all();
-        
-        // Ejecutar el código después de que el usuario envia el formulario
+
+        // Execute the code after the user submits the form
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            /** Crea una nueva instancia */
+
+            /** Create a new instance */
             $args = $_POST['property'];
             $args['sellerId'] = (int) ($args['sellerId'] ?? 0);
             $property = new Property($args);
-            // Generar un name único
+
+            // Generate a unique name
             $nameImage = md5(uniqid(rand(), true)) . ".webp";
             $image = null;
-            //setear la image
-            // Realiza un resize de image con Intervention Image
+
+            // Resize the image using Intervention Image
             if ($_FILES['property']['tmp_name']['image']) {
                 $image = Image::make($_FILES['property']['tmp_name']['image'])->fit(800, 600);
                 $property->setImage($nameImage);
             }
-            //Validar
+
+            // Validate
             $alerts = $property->validate();
 
-            //Revisar que el array de errores esta vacio
+            // Check that the error array is empty
             if (empty($alerts)) {
-                // Crear la carpeta para subir images
+
+                // Create the folder to upload images
                 if (!is_dir(FOLDER_IMAGES)) {
                     mkdir(FOLDER_IMAGES);
                 }
-                // Guarda la image en el servidor
+
+                // Save the image to the server
                 if ($image) {
                     $image->save(FOLDER_IMAGES . $nameImage);
                 }
 
-                // Guarda en la base de datos
+                // Save to the database
                 $property->guardar();
-                Property::setAlert('success', 'Propiedad creada correctamente');
+
+                Property::setAlert('success', t('Propiedad creada correctamente'));
                 $alerts = Property::getAlerts();
-                header('Refresh: 0.5; URL=/properties/admin');
+
+                header('Refresh: 1.5; URL=/properties/admin');
             }
         }
+
         //$alerts = Property::getAlerts();
+
         $router->render('properties/create', [
-            'header' => 'Crear propiedad',
+            'header' => t('Crear propiedad'),
             'alerts' => $alerts,
             'property' => $property,
             'sellers' => $sellers
         ]);
     }
+
     public static function update(Router $router)
     {
         $id = validateOrRedirect('/admin');
-        // Obtener los datos de la propiedad
+
+        // Get property data
         $property = Property::find($id);
-        //obtener todos los vendedores
+
+        // Get all sellers
         $sellers = Seller::all();
-        // Arreglo con mensajes de errores
+
+        // Array containing error messages
         $alerts = Property::getAlerts();
-        // Ejecutar el código después de que el usuario envia el formulario
+
+        // Execute the code after the user submits the form
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Asignar los atributos
+
+            // Assign the attributes
             $args = $_POST['property'];
             $args['sellerId'] = (int) ($args['sellerId'] ?? 0);
-
             $property->sync($args);
-            // Validación
+
+            // Validation
             $alerts = $property->validate();
 
-            // Subida de archivos
-            // Generar un name único
+            // File upload
+
+            // Generate a unique name
             $nameImage = md5(uniqid(rand(), true)) . ".webp";
             $image = null;
 
@@ -103,39 +125,49 @@ class PropertyController
                 $property->setImage($nameImage);
             }
 
-            //Revisar que el array de errores esta vacio
+            // Check that the error array is empty
             if (empty($alerts)) {
+
                 if ($_FILES['property']['tmp_name']['image']) {
                     $image->save(FOLDER_IMAGES . $nameImage);
                 }
+
                 $property->guardar();
-                Property::setAlert('success', 'Propiedad actualizada correctamente');
+
+                Property::setAlert('success', t('Propiedad actualizada correctamente'));
                 $alerts = Property::getAlerts();
-                header('Refresh: 0.5; URL=/properties/admin');
+
+                header('Refresh: 1.5; URL=/properties/admin');
             }
         }
+
         //$alerts = Property::getAlerts();
+
         $router->render('properties/update', [
-            'header' => 'Actualizar propiedad',
+            'header' => t('Actualizar propiedad'),
             'property' => $property,
             'sellers' => $sellers,
             'alerts' => $alerts
         ]);
     }
+
     public static function delete(Router $router)
     {
-        // eliminar entrada segun su id
+        // Delete entry by ID
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            //validar id
+
+            // Validate ID
             $id = $_POST['id'];
             $id = filter_var($id, FILTER_VALIDATE_INT);
-            
-            if($id) {
+
+            if ($id) {
                 $type = $_POST['type'];
-                // peticiones validas
+
+                // Valid requests
                 if (validateContentType($type)) {
                     $property = Property::find($id);
                     $property->delete();
+
                     header('Location: /properties/admin');
                 }
             }

@@ -11,11 +11,10 @@ function connectDB(): mysqli
     );
 
     if(!$db) {
-        echo "Error, no se pudo conectar";
+        echo t('Error, no se pudo conectar');
         exit;
     }
     $db->set_charset('utf8');
     
     return $db;
-    
 }

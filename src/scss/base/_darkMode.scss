@@ -4,7 +4,6 @@
 
 .dark-mode {
     background-color: color.adjust(v.$darkGray, $lightness: -10%);
-    //transition: background-color 0.5s;
 
     p:not(.price) {
         color: v.$white;
@@ -13,9 +12,11 @@
     h1,h2,h3,h4  {
         color: v.$gray;
     }
+
     .creme {
         color: v.$creme;
     }
+
     .btn-yellow {
         @include m.btn(color.adjust(v.$orange, $lightness: -6%), inline-block);
     }
@@ -23,18 +24,27 @@
     .btn-yellow-block {
         @include m.btn(color.adjust(v.$orange, $lightness: -6%), block);
     }
+
     .btn-roof {
         @include m.btn(v.$creme, inline-block);
     }
+
     .image-contact h2 {
         color: v.$gray;
     }
+
+    img.icon {
+        filter: invert(100%);
+    }
+
     .entry-blog {
         margin-bottom: 2rem;
     }
+
     .testimonial {
         background-color: v.$creme;
     }
+
     .advertisement, 
     .summary-propad,
     .gray {
@@ -44,22 +54,22 @@
         .price {
             color: v.$creme;
         }
+
         .icon {
             filter: invert(100%);
         }
     }
+
     .form fieldset {
-            background-color: color.adjust(v.$darkGray, $lightness: -7%);
-        }
+        background-color: color.adjust(v.$darkGray, $lightness: -7%);
+    }
     
     .text-aboutUs blockquote {
         color: v.$white;
     }
 
-    .info-meta {
-        span {
-            color: v.$orange;
-        }
+    .info-meta span {
+        color: v.$orange;
     }
 
     .text-entry h4:after {
@@ -85,19 +95,21 @@
             color: v.$white;
         }
     }
+
     table.properties {
         thead {
             background-color: color.adjust(v.$darkGray, $lightness: +10%);
             border: 1px solid v.$gray;
-
         }
+
         tr:nth-child(2n) {
             background-color: color.adjust(v.$darkGray, $lightness: -8%);
-
         }
+
         &:nth-child(2n+1) {
             background-color: color.adjust(v.$darkGray, $lightness: -4%);
         }
+
         td {
             color: v.$white;
         }

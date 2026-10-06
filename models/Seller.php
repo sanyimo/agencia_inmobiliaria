@@ -13,6 +13,7 @@ class Seller extends ActiveRecord {
     public string $phone = '';
     public string $email = '';
 
+    // Constructor to initialize the seller object with default values or provided arguments
     public function __construct($args = [])
     {
         $this->id = $args['id'] ?? null;
@@ -23,22 +24,29 @@ class Seller extends ActiveRecord {
         $this->email = $args['email'] ?? '';
     }
 
-    public function validate() {
+    // Validation method to check if the seller data is valid
+    public function validate()
+    {
         if (!$this->name) {
-            self::$alerts['error'][] = "El nombre es necesario";
+            self::$alerts['error'][] = t('El nombre es necesario');
         }
+
         if (!$this->lastName) {
-            self::$alerts['error'][] = "El apellido es necesario";
+            self::$alerts['error'][] = t('El apellido es necesario');
         }
+
         if (!$this->image) {
-            self::$alerts['error'][] = "La imagen es necesaria";
+            self::$alerts['error'][] = t('La imagen es necesaria');
         }
+
         if (!$this->phone) {
-            self::$alerts['error'][] = "El teléfono es necesario";
+            self::$alerts['error'][] = t('El teléfono es necesario');
         }
-        if(!$this->email) {
-            self::$alerts['error'][] = "El E-mail es necesario";
+
+        if (!$this->email) {
+            self::$alerts['error'][] = t('El E-mail es necesario');
         }
+
         return self::$alerts;
     }
 }

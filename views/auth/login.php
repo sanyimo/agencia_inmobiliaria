@@ -11,7 +11,7 @@
             <legend><?php echo t('Correo electrónico y contraseña'); ?></legend>
 
             <label for="email"><?php echo t('E-mail'); ?></label>
-            <input type="email" name="email" placeholder="<?php echo t('Tu e-mail'); ?>" id="email">
+            <input type="email" name="email" placeholder="<?php echo t('Tu e-mail'); ?>" id="email" autocomplete="email">
 
             <label for="password"><?php echo t('Contraseña'); ?></label>
             <input type="password" name="password" placeholder="<?php echo t('Tu contraseña'); ?>" id="password">

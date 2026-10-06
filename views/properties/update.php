@@ -1,8 +1,9 @@
 <main class="container section">
     <p id="today"><?php echo dateTime(); ?></p>
-    <h1 class="creme"><?php echo $header ?? 'Actualizar propiedad'; ?></h1>
+    <?php $header = $header ?? 'Actualizar propiedad'; ?>
+    <h1 class="creme"><?php echo t($header); ?></h1>
 
-    <a href="/properties/admin" class="btn btn-roof">Volver</a>
+    <a href="/properties/admin" class="btn btn-roof"><?php echo t('Volver'); ?></a>
 
     <?php
     $alerts = $alerts ?? [];
@@ -11,7 +12,6 @@
     <form class="form" method="POST" enctype="multipart/form-data">
         <?php include __DIR__ . '/form.php' ?>
 
-        <input type="submit" value="Actualizar propiedad" class="btn btn-roof">
-
+        <input type="submit" value="<?php echo t('Actualizar propiedad'); ?>" class="btn btn-roof">
     </form>
 </main>

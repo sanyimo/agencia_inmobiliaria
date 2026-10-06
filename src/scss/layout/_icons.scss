@@ -3,7 +3,6 @@
 
 
 @include m.tablet {
-
     .icons-aboutUs {
         @include m.grid(3, 2rem);
     }
@@ -11,10 +10,12 @@
 
 .icon {
     text-align: center;
+
     img {
         height: 10rem;
         filter: invert(61%) sepia(78%) saturate(331%) hue-rotate(339deg) brightness(103%) contrast(91%);
     }
+    
     h3 {
         text-transform: uppercase;
     }

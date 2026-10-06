@@ -1,23 +1,23 @@
 <main class="container section">
     <?php $header = $header ?? 'Vendedores'; ?>
     <p id="today"><?php echo dateTime(); ?></p>
-    <h1 class="creme"><?php echo $header; ?></h1>
+    <h1 class="creme"><?php echo t($header); ?></h1>
 
     <div class="admin-nav">
         <a href="/admin" class="btn btn-yellow"><i class="fa-solid fa-arrow-rotate-left"></i> ADMIN</a>
-        <a href="/sellers/create" class="btn btn-roof"><i class="fa-solid fa-arrow-down"></i> Nuevo vendedor</a>
-        <a href="/properties/admin" class="btn btn-yellow"> Ir a Propiedades <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="/sellers/create" class="btn btn-roof"><i class="fa-solid fa-arrow-down"></i> <?php echo t('Nuevo vendedor'); ?></a>
+        <a href="/properties/admin" class="btn btn-yellow"><?php echo t('Ir a Propiedades'); ?> <i class="fa-solid fa-arrow-right"></i></a>
     </div>
 
     <table class="properties">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Imagen</th>
-                <th>Nombre</th>
-                <th>Teléfono</th>
+                <th><?php echo t('Imagen'); ?></th>
+                <th><?php echo t('Nombre'); ?></th>
+                <th><?php echo t('Teléfono'); ?></th>
                 <th>E-mail</th>
-                <th>Acciones</th>
+                <th><?php echo t('Acciones'); ?></th>
             </tr>
         </thead>
         <tbody> <!-- show los Resultados -->
@@ -25,22 +25,19 @@
             <?php foreach ($sellers as $seller): ?>
                 <tr>
                     <td><?php echo $seller->id; ?></td>
-                    <td><img src="/images/imagesSellers/<?php echo $seller->image; ?>" class="image-table" alt="Imagen del vendedor"></td>
+                    <td><img src="/images/imagesSellers/<?php echo $seller->image; ?>" class="image-table" alt="<?php echo t('Imagen del vendedor'); ?>"></td>
                     <td><?php echo $seller->name . " " . $seller->lastName; ?></td>
                     <td><?php echo $seller->phone; ?></td>
                     <td><?php echo $seller->email; ?></td>
-                    <td>
-                        <form method="POST" class="w-100" action="/sellers/delete">
-                            <input type="hidden" name="id" value="<?php echo $seller->id; ?>">
-                            <input type="hidden" name="type" value="seller">
-                            <div class="btn-gray-block" onclick="if (!confirm('¿Desea borrar a<?php echo $seller->name . ' ' . $seller->lastName; ?>?')) { return false }">
-                                <i class="fa-solid fa-trash-can"></i>
-                                <input type="submit" value="Eliminar">
-                            </div>
-                        </form>
+                    <?php
+                    $id = $seller->id;
+                    $name = $seller->name . ' ' . $seller->lastName;
+                    $type = 'seller';
+                    $deleteUrl = '/sellers/delete';
+                    $updateUrl = '/sellers/update?id=' . $seller->id;
 
-                        <a href="./update?id=<?php echo $seller->id; ?>" class="btn-yellow-block"><i class="fa-solid fa-pen"></i></a>
-                    </td>
+                    require __DIR__ . '/../templates/crud_actions.php';
+                    ?>
                 </tr>
             <?php endforeach; ?>
         </tbody>

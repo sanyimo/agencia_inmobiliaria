@@ -1,6 +1,7 @@
 @use 'sass:color';
 @use 'variables' as v;
-/** Media Queries **/
+
+
 @mixin mobile {
     @media (min-width: v.$mobile) {
         @content;
@@ -18,6 +19,7 @@
         @content;
     }
 }
+
 @mixin xl_desktop {
     @media (min-width: v.$xl_desktop) {
         @content;
@@ -29,6 +31,7 @@
     gap: $spacing;
     grid-template-columns: repeat($columns, 1fr);
 }
+
 @mixin btn($bgColor, $display ) {
     background-color: $bgColor;
     color: v.$white;
@@ -47,11 +50,13 @@
         cursor: pointer;
     }
 }
+
 .container {
     width: 95%;
     max-width: 120rem;
     margin: 0 auto;
 }
+
 @mixin container-md {
     width: min(95%, 80rem);
     margin: 0 auto;

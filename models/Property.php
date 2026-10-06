@@ -20,6 +20,7 @@ class Property extends ActiveRecord
     public string $created_at;
     public int|string $sellerId;
 
+    // Constructor to initialize the property object with default values or provided arguments
     public function __construct($args = [])
     {
         $this->id = $args['id'] ?? null;
@@ -35,32 +36,41 @@ class Property extends ActiveRecord
         $this->sellerId = $args['sellerId'] ?? '';
     }
 
+    // Validation method to check if the property data is valid
     public function validate()
     {
         if (!$this->header) {
-            self::$alerts['error'][] = "Hace falta un título";
+            self::$alerts['error'][] = t('Hace falta un título');
         }
+
         if (!$this->price) {
-            self::$alerts['error'][] = 'El precio es necesario';
+            self::$alerts['error'][] = t('El precio es necesario');
         }
+
         if (strlen($this->description) < 150) {
-            self::$alerts['error'][] = 'La descripción es necesaria y debe tener al menos 150 caracteres';
+            self::$alerts['error'][] = t('La descripción es necesaria y debe tener al menos 150 caracteres');
         }
+
         if (!$this->bedrooms) {
-            self::$alerts['error'][] = 'El número de habitaciones es necesario';
-        }  
-        if(!$this->wc) {
-            self::$alerts['error'][] = 'El número de baños es necesario';
+            self::$alerts['error'][] = t('El número de habitaciones es necesario');
         }
+
+        if (!$this->wc) {
+            self::$alerts['error'][] = t('El número de baños es necesario');
+        }
+
         if (!$this->area) {
-            self::$alerts['error'][] = 'El número de m2 es necesario';
+            self::$alerts['error'][] = t('El número de m2 es necesario');
         }
+
         if (!$this->sellerId) {
-            self::$alerts['error'][] = 'Elige un/a vendedor/a';
+            self::$alerts['error'][] = t('Elige un/a vendedor/a');
         }
+
         if (!$this->image) {
-            self::$alerts['error'][] = 'La imagen es necesaria';
+            self::$alerts['error'][] = t('La imagen es necesaria');
         }
+
         return self::$alerts;
     }
 }

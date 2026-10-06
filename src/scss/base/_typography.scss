@@ -1,6 +1,7 @@
 @use 'variables' as v;
 @use 'mixins' as m;
     
+
 h1, h2, h3 {
     font-family: v.$principal;
     margin: calc(v.$separation / 2) 0;

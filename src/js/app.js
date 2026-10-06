@@ -1,11 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
-
     eventListeners();
-
     darkMode();
 });
-function darkMode() {
 
+function darkMode() {
     const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
     const btnDarkMode = document.querySelector('.dark-mode-btn');
     const iconDarkMode = btnDarkMode.querySelector('img');
@@ -19,9 +17,9 @@ function darkMode() {
             : '/build/img/dark-mode.svg';
 
         btnDarkMode.title = modeDarkMode
-            ? 'Activar modo claro'
-            : 'Activar modo oscuro';
-        
+            ? btnDarkMode.dataset.light
+            : btnDarkMode.dataset.dark;
+
         btnDarkMode.setAttribute('aria-label', btnDarkMode.title);
     }
 
@@ -76,12 +74,12 @@ function selectMethod(e) {
             <label for="phone"></label>
             <input type="number" class="sample" placeholder="&#xf095;" id="phone" name="contact[phone]">
 
-            <p>Elija la fecha y la hora que mejor le convenga para que le llamemos</p>
+            <p>${translations.callDateTime}</p>
 
-            <label for="date">Fecha:</label>
+<label for="date">${translations.date}</label>
             <input type="date" id="date" name="contact[fecha]">
 
-            <label for="hour">Hora (9-18h):  </label>
+            <label for="hour">${translations.hour} (9-18h)</label>
             <input type="time" id="hour" min="09:00" max="18:00" name="contact[hora]">
         `;
     } else {

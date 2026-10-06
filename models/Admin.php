@@ -5,7 +5,6 @@ namespace Model;
 
 class Admin extends ActiveRecord
 {
-
     protected static $table = 'users';
     protected static $columnsDB = ['id', 'email', 'password'];
 
@@ -23,59 +22,59 @@ class Admin extends ActiveRecord
     public function validate()
     {
         if (!$this->email) {
-            self::$alerts['error'][] = "El correo electrónico no es válido";
+            self::$alerts['error'][] = t('El correo electrónico no es válido');
         }
 
         if (!$this->password) {
-            self::$alerts['error'][] = "La contraseña es necesaria";
+            self::$alerts['error'][] = t('La contraseña es necesaria');
         }
         return self::$alerts;
     }
+
     public function userExists(): ?\mysqli_result
     {
-        // Escapar el email para evitar inyección SQL
+        // Sanitize the email to prevent SQL injection
         $email = self::$db->real_escape_string($this->email);
 
-        // Revisar si el usuario existe o no
+        // Query the database to check if the user exists
         $query = "SELECT * FROM " . self::$table . " WHERE email = '" . $email . "' LIMIT 1";
         $result = self::$db->query($query);
 
         if (!$result || $result->num_rows === 0) {
-            self::$alerts['error'][] = "Este usuario no existe";
-            return null; // Retornar null para indicar que no se encontró usuario
+            self::$alerts['error'][] = t('Este usuario no existe');
+            return null;
         }
         return $result;
     }
     public function checkPassword(?\mysqli_result $result): bool
     {
         if (!$result) {
-            return false; // Si no hay resultado, retornar false directamente
+            return false; // No result to check against
         }
 
-        // Obtener el usuario de la consulta
+        // Fetch the user data from the result
         $user = $result->fetch_object();
 
         if (!$user) {
-            self::$alerts['error'][] = "Usuario no encontrado";
+            self::$alerts['error'][] = t('Usuario no encontrado');
             return false;
         }
 
-        // Verificar si el password es correcto
+        // Check if the provided password matches the hashed password in the database
         if (!password_verify($this->password, $user->password)) {
-            self::$alerts['error'][] = 'Contraseña incorrecta';
+            self::$alerts['error'][] = t('Contraseña incorrecta');
             return false;
         }
 
-        return true; // La contraseña es correcta
+        return true; // Password is correct
     }
 
     public function authenticate(): void
     {
-        // El usuario esta authenticated
+        // Start the session if it hasn't been started yet
         session_start();
 
-        // Llenar el arreglo de la sesión
-        //ROLES????
+        // Set session variables to indicate the user is logged in
         $_SESSION['user'] = $this->email;
         $_SESSION['login'] = true;
 

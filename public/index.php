@@ -30,14 +30,14 @@ $router->get('/properties', [PagesController::class, 'properties']);
 $router->get('/property', [PagesController::class, 'property']);
 $router->get('/blog', [PagesController::class, 'blog']);
 $router->get('/entry', [PagesController::class, 'entry']);
-$router->get('/entry', [PagesController::class, 'entry2']);
+$router->get('/entry2', [PagesController::class, 'entry2']);
 $router->get('/contact', [PagesController::class, 'contact']);
 $router->post('/contact', [PagesController::class, 'contact']);
 
-//Login y autenticacion
+// Authentication routes
 $router->get('/login', [LoginController::class, 'login']);
 $router->post('/login', [LoginController::class, 'login']);
 $router->get('/logout', [LoginController::class, 'logout']);
 
-// Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
+// Check the routes and execute the corresponding controller method
 $router->checkRoutes();

@@ -24,7 +24,7 @@ class LoginController {
             $alerts = $auth->validate();
 
             if (empty($alerts)) {
-                //verificar si existe usuario o no
+                // Check if the user exists
                 $result = $auth->userExists();
                 if (!$result) {
                     $alerts = Admin::getAlerts();
@@ -40,7 +40,7 @@ class LoginController {
         }
         
         $router->render('auth/login', [
-            'header' => 'Iniciar sesión',
+            'header' => t('Iniciar sesión'),
             'alerts' => $alerts
         ]); 
     }

@@ -6,45 +6,46 @@ class ActiveRecord {
     public ?int $id = null;
     public ?string $image = null;
 
-    // Base DE DATOS
+    // Database connection
     protected static ?\mysqli $db = null;
     protected static $table = '';
     protected static $columnsDB = [];
 
-    //errores
+    //errors
     protected static $alerts = [];
 
-    //definir la conexion a la BD
+    //define the database connection
     public static function setDB(\mysqli $database): void {
         self::$db = $database;
     }
 
+    // Set an alert message
     public static function setAlert(string $type, string $message): void
     {
         static::$alerts[$type][] = $message;
     }
 
-    // Validación
+    // Validation of the model
     public static function getAlerts()
     {
         return static::$alerts;
     }
-    // Registros - CRUD
+    // Registries - CRUD
     public function guardar() {
         if(!is_null($this->id)) {
             // update
             $this->update();
         } else {
-            // Creando un nuevo registro
+            // Create a new record
             $this->create();
         }
     }
     public function create()
     {
-        //sanitizar los datos
+        //sanitize the data
         $attributes = $this->sanitizeAttr();
 
-        // Insertar en la base de datos
+        // Insert into the database
         $query = " INSERT INTO " . static::$table . " ( ";
         $query .= join(', ', array_keys($attributes));
         $query .= " ) VALUES (' ";
@@ -57,7 +58,7 @@ class ActiveRecord {
     //update
     public function update()
     {
-        // Sanitizar los datos
+        // Sanitize the data
         $attributes = $this->sanitizeAttr();
 
         $values = [];
@@ -73,7 +74,7 @@ class ActiveRecord {
 
     }
 
-    // Eliminar un registro
+    // Eliminate a record
     public function delete()
     {
         $query = "DELETE FROM " . static::$table . " WHERE id = " . self::$db->escape_string($this->id) . " LIMIT 1";
@@ -84,7 +85,7 @@ class ActiveRecord {
         }
     }
 
-    //identificar y unir los atributos de la BD
+    //identify the attributes of the object that are in the database
     public function attributes()
     {
         $attributes = [];
@@ -96,6 +97,7 @@ class ActiveRecord {
         return $attributes;
     }
 
+    // Sanitize the attributes before saving to the database
     public function sanitizeAttr()
     {
         $attributes = $this->attributes();
@@ -106,35 +108,41 @@ class ActiveRecord {
         return $sanitized;
 
     }
-    // Subida de archivos
+    // Set the image for the record
     public function setImage(?string $image): void
     {
-        // Elimina la image previa
+        // Eliminate the previous image if it exists
         if(!is_null($this->id) ) {
             $this->eraseImage();
         }
-        // Asignar al atributo de image el name de la image
+        // Assign the new image
         if ($image) {
             $this->image = $image;
         }
     }
 
+    // Eliminate the image from the server
     public function eraseImage()
     {
-        // Comprobar si existe el archivo
+        // Check if the image exists
         $fileExists = file_exists(FOLDER_IMAGES . $this->image);
         $sellerFileExists = file_exists(FOLDER_SELLERS . $this->image);
+        // Delete the image
         if ($fileExists) {
             unlink(FOLDER_IMAGES . $this->image);
         } else if ($sellerFileExists) {
             unlink(FOLDER_SELLERS . $this->image);
         }
     }
+
+    // Validation
     public function validate()
     {
         static::$alerts = [];
         return static::$alerts;
     }
+
+    // Querys
     public static function all() {
         $query = "SELECT * FROM " . static::$table;
 
@@ -142,7 +150,8 @@ class ActiveRecord {
 
         return $result;
     }
-    //obtiene eterminado numero de registros
+
+    // Get a limited number of records
     public static function get(int $uantity): array
     {
         $query = "SELECT * FROM " . static::$table . " LIMIT " . $uantity;
@@ -152,7 +161,7 @@ class ActiveRecord {
         return $result;
     }
 
-      // Busca un registro por su id
+      // Get a record by ID
       public static function find(int|string $id): ?static {
         $query = "SELECT * FROM " . static::$table . " WHERE id = {$id}";
 
@@ -160,27 +169,31 @@ class ActiveRecord {
 
         return array_shift($result);
     }
-    // Consulta Plana de SQL (Utilizar cuando los métodos del modelo no son suficientes)
+    // Get a record by ID (alternative method)
     public static function SQL(string $query): array {
         $result = self::consultSQL($query);
         return $result;
     }
+
+    // Execute a SQL query and return the results as an array of objects
     public static function consultSQL(string $query): array
     {
-        // Consultar la base de datos
+        // Consult the database
         $result = self::$db->query($query);
 
-        // Iterar los results
+        // Iterate over the results and create an array of objects
         $array = [];
         while ($register = $result->fetch_assoc()) {
             $array[] = static::createObject($register);
         }
-        // liberar la memoria
+        // Free the memory used by the result set
         $result->free();
 
-        // retornar los resultados
+        // Return the array of objects
         return $array;
     }
+
+    // Create an object of the current class from a database record
     protected static function createObject(array $register): static
     {
         $object = new static;
@@ -193,7 +206,7 @@ class ActiveRecord {
         return $object;
     }
 
-    //Sincronizar el objeto en memoria con los cambios realizados por el usuario
+    //Synchronize the object with the data from an array
     public function sync($args = [])
     {
         foreach($args as $key => $value) {

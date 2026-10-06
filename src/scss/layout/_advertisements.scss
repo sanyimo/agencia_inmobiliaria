@@ -2,6 +2,7 @@
 @use '../base/variables' as v;
 @use '../base/mixins' as m;
 
+
 @include m.tablet {
     .container-advertisements {
         @include m.grid(2, 2rem);
@@ -52,6 +53,7 @@
                 max-width: 3rem;
             }
         }
+        
         p {
             font-weight: black;
         }        

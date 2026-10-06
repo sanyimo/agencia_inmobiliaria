@@ -1,14 +1,15 @@
 <main class="container section content-centered">
-    <h1 class="creme">Terraza en el techo de tu casa</h1>
+    <a href="/blog" class="btn btn-roof"><?php echo t('Volver'); ?></a>
+    <h4><?php echo t('Terraza en el techo de tu casa'); ?></h4>
 
     <picture>
         <source srcset="build/img/blog1.webp" type="image/webp">
         <source srcset="build/img/blog1.avif" type="image/avif">
         <source srcset="build/img/blog1.jpg" type="image/jpeg">
-        <img loading="lazy" src="build/img/blog1.jpg" alt="imagen de la propiedad">
+        <img loading="lazy" src="build/img/blog1.jpg" alt="<?php echo t('Imagen de la propiedad'); ?>">
     </picture>
 
-    <p class="info-meta">Escrito el: <span>20/10/205</span> por: <span>Admin</span> </p>
+    <p class="info-meta"><?php echo t('Escrito el'); ?>: <span>28/10/2026</span> <?php echo t('por:'); ?> <span>Admin</span></p>
 
     <div class="summary-property gray">
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis minus aliquam dolorum sint modi expedita esse doloribus necessitatibus ratione facere nobis voluptatem quia ab saepe aut voluptatum repudiandae, ipsa ut.
@@ -18,6 +19,5 @@
         <p>Quibusdam fuga totam hic debitis sed itaque sit, ab esse inventore dolorum, nihil perferendis quam nemo, est earum accusamus. Ullam eos esse adipisci officia. Ipsum quam officia earum velit minima.</p>
         <p>Perspiciatis, sapiente facilis accusantium suscipit laborum earum molestiae reprehenderit ea nemo ex tempora consectetur, sed rerum dignissimos maiores eaque. Voluptatibus accusamus minus, veniam commodi dolorum distinctio dignissimos optio tempore deleniti!</p>
         <p>Corporis, omnis voluptates! Natus optio velit odit minus nam neque quaerat dignissimos in amet, ex sed incidunt est praesentium tempora placeat magni quam nemo deserunt porro impedit voluptatibus dolores. Corporis.</p>
-
     </div>
 </main>

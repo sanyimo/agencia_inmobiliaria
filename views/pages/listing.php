@@ -3,7 +3,9 @@
     <?php foreach ($properties as $property) { ?>
         <div class="advertisement">
 
-            <img loading="lazy" src="/images/imagesProperties/<?php echo $property->image; ?>" alt="advertisement">
+            <img loading="lazy"
+                src="/images/imagesProperties/<?php echo $property->image; ?>"
+                alt="<?php echo t('Anuncio'); ?>">
 
             <div class="content-advertisement">
                 <h3><?php echo $property->header; ?></h3>
@@ -14,15 +16,15 @@
 
                 <ul class="icons-features">
                     <li>
-                        <img class="icon" loading="lazy" src="build/img/icono_wc.svg" alt="icono wc">
+                        <img class="icon" loading="lazy" src="build/img/icono_wc.svg" alt="<?php echo t('Icono baño'); ?>">
                         <p><?php echo $property->wc; ?></p>
                     </li>
                     <li>
-                        <img class="icon" loading="lazy" src="build/img/icono_estacionamiento.svg" alt="icono aparcamiento">
+                        <img class="icon" loading="lazy" src="build/img/icono_estacionamiento.svg" alt="<?php echo t('Icono aparcamiento'); ?>">
                         <p><?php echo $property->parking; ?></p>
                     </li>
                     <li>
-                        <img class="icon" loading="lazy" src="build/img/icono_dormitorio.svg" alt="icono habitaciones">
+                        <img class="icon" loading="lazy" src="build/img/icono_dormitorio.svg" alt="<?php echo t('Icono habitaciones'); ?>">
                         <p><?php echo $property->bedrooms; ?></p>
                     </li>
                     <li>
@@ -31,7 +33,7 @@
                 </ul>
 
                 <a href="/property?id=<?php echo $property->id; ?>" class="btn-yellow-block">
-                    Ver propiedad
+                    <?php echo t('Ver propiedad'); ?>
                 </a>
             </div><!--.content-advertisement-->
         </div><!--advertisement-->

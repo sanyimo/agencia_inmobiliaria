@@ -10,7 +10,7 @@ require 'functions.php';
 require 'config/database.php';
 
 
-//conectarnos a la BD
+//connect to the database
 $db = connectDB();
 
 

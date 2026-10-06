@@ -2,6 +2,7 @@
 @use '../base/variables' as v;
 @use '../base/mixins' as m;
 
+
 @keyframes breathing {
     0% {
         transform: scale(1);
@@ -52,7 +53,7 @@
         @include m.tablet {
             margin-top: 0;
         }
-    }    
+    }
 }
 
 .bar {
@@ -60,12 +61,12 @@
     flex-direction: column;
     align-items: center;
     padding-top: 2rem;
-    
+
     @include m.tablet {
         flex-direction: row;
         justify-content: space-between;
         align-items: flex-end;
-        
+
         img:not(.dark-mode-btn img) {
             &:hover {
                 animation: breathing 2s ease-in-out infinite
@@ -104,21 +105,24 @@
             }
         }
 
-        &:hover {
+        &:hover,
+        &.active {
             transform: translateY(-5px);
-                /* Desplazamiento hacia arriba */
-                color: v.$creme;
-                text-decoration: underline v.$creme 3px;  
-                text-underline-offset: 15px;
+            color: v.$creme;
+            text-decoration: underline v.$creme 3px;
+            text-underline-offset: 15px;
+        }
+
+        &.active:hover {
+            transform: translateY(-5px) scale(1.1);
         }
     }
-    
+
     a.admin-link {
         margin-left: 4rem;
     }
 }
 
-/** Menu de hamburguesa **/
 .hamburger-menu {
     @include m.tablet {
         display: none;
