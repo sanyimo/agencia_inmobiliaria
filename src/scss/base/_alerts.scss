@@ -2,7 +2,7 @@
 @use 'variables' as v;
 @use 'mixins' as m;
 
-.alerta {
+.alert {
     padding: .5rem;
     text-align: center;
     font-weight: v.$bold;
@@ -19,13 +19,13 @@
         color: #e20101;
         border: solid 3px color.adjust(#e20101, $lightness: +6%);
         border-radius: 1rem;
-        text-shadow: v.$grisOscuro 1px 0.5px;
+        text-shadow: v.$darkGray 1px 0.5px;
     }
 
-    &__exito {
-        background-color: color.adjust(v.$grisOscuro, $lightness: +8%);
-        color: v.$amarillo;
-        border: solid 3px v.$gris;
+    &__success {
+        background-color: color.adjust(v.$darkGray, $lightness: +8%);
+        color: v.$creme;
+        border: solid 3px v.$gray;
         border-radius: 1rem;
     }
 }

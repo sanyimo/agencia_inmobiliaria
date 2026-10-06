@@ -1,13 +1,15 @@
 @use '../base/mixins' as m;
 @use '../base/variables' as v;
 
+
 @include m.tablet {
-    .iconos-nosotros {
+
+    .icons-aboutUs {
         @include m.grid(3, 2rem);
     }
 }
 
-.icono {
+.icon {
     text-align: center;
     img {
         height: 10rem;
@@ -17,7 +19,8 @@
         text-transform: uppercase;
     }
 }
-.muestra {
+
+.sample {
     font-family: FontAwesome;
     font-size: 1.3rem;
 }

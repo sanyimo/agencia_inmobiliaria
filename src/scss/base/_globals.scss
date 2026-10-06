@@ -1,15 +1,18 @@
 @use 'variables' as v;
 @use 'mixins' as m;
 
+
 html {
     font-size: 62.5%;
     box-sizing: border-box;
 }
+
 *, *:before, *:after {
     box-sizing: inherit;
 }
+
 body {
-    font-family: v.$fuente_principal;
+    font-family: v.$principal;
     font-size: 1.6rem;
     line-height: 1.8;
     min-height: 100vh;
@@ -19,9 +22,8 @@ a {
     text-decoration: none;
 }
 
-img:not(.imagen-tabla, .pic-small),
+img:not(.image-table, .pic-small),
 picture {
     width: 100%;
     display: block;
 }
-

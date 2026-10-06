@@ -19,7 +19,7 @@
     }
 }
 
-.derecha {
+.right {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -28,7 +28,7 @@
         align-items: flex-end;
     }
 
-    .dark-mode-boton {
+    .dark-mode-btn {
         width: 4.8rem;
         margin-top: 3rem;
         margin-bottom: 2rem;
@@ -44,7 +44,7 @@
         }
 
         &:active {
-            color: color.adjust(v.$blanco, $lightness: -7%);
+            color: color.adjust(v.$white, $lightness: -7%);
             transform: scale(0.6) rotateZ(50deg) !important;
             transition: all 0.1s ease-in-out !important;
         }
@@ -52,10 +52,10 @@
         @include m.tablet {
             margin-top: 0;
         }
-    }
-    
+    }    
 }
-.barra {
+
+.bar {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -66,7 +66,7 @@
         justify-content: space-between;
         align-items: flex-end;
         
-        img:not(.dark-mode-boton img) {
+        img:not(.dark-mode-btn img) {
             &:hover {
                 animation: breathing 2s ease-in-out infinite
             }
@@ -74,7 +74,7 @@
     }
 }
 
-.navegacion {
+.navegation {
     visibility: hidden;
     opacity: 0;
     height: 0;
@@ -86,8 +86,9 @@
         visibility: visible;
         transition: visibility .3s ease-in-out, opacity .5s linear, height .5s linear;
     }
+
     a {
-        color: v.$blanco;
+        color: v.$white;
         text-decoration: none;
         font-size: 2.2rem;
         display: block;
@@ -106,8 +107,8 @@
         &:hover {
             transform: translateY(-5px);
                 /* Desplazamiento hacia arriba */
-                color: v.$amarillo;
-                text-decoration: underline v.$amarillo 3px;  
+                color: v.$creme;
+                text-decoration: underline v.$creme 3px;  
                 text-underline-offset: 15px;
         }
     }
@@ -118,25 +119,28 @@
 }
 
 /** Menu de hamburguesa **/
-.mobile-menu {
+.hamburger-menu {
     @include m.tablet {
         display: none;
     }
-&:active {
-    transform: scale(.7, .7);
-    transition: all 0.1s ease-in-out;
+
+    &:active {
+        transform: scale(.7, .7);
+        transition: all 0.1s ease-in-out;
     }
+
     img {
         width: 5rem;
     }
 }
 
-.mostrar {
+.show {
     visibility: visible;
     opacity: 1;
     height: auto;
 }
-.selector-idioma {
+
+.lang-selector {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -151,16 +155,16 @@
     a {
         margin-right: 0;
         font-size: 1.4rem;
-        color: v.$blanco;
+        color: v.$white;
         text-decoration: none;
 
         &:hover,
         &.activo {
-            color: v.$amarillo;
+            color: v.$creme;
         }
     }
 
     span {
-        color: v.$blanco;
+        color: v.$white;
     }
 }

@@ -1,14 +1,14 @@
 @use 'variables' as v;
 @use 'mixins' as m;
 
-.seccion {
-    margin-top: calc(v.$separacion / 2);
-    margin-bottom: calc(v.$separacion / 2);
+.section {
+    margin-top: calc(v.$separation / 2);
+    margin-bottom: calc(v.$separation / 2);
 }
-.contenido-centrado {
+.content-centered {
     max-width: 80rem;
 }
-.alinear-derecha {
+.align-right {
     display: flex;
     justify-content: flex-end;
 }
@@ -30,8 +30,8 @@
             grid-template-columns: repeat(2, 1fr);
         }
 }
-#hoydia {
+#today {
     text-align: right;
-    color: v.$amarillo;
+    color: v.$creme;
     font-size: 2rem;
 }

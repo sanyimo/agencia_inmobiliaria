@@ -6,88 +6,88 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 function darkMode() {
 
-    const prefiereDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
-    const botonDarkMode = document.querySelector('.dark-mode-boton');
-    const iconoDarkMode = botonDarkMode.querySelector('img');
-    const preferenciaGuardada = localStorage.getItem('dark-mode');
+    const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
+    const btnDarkMode = document.querySelector('.dark-mode-btn');
+    const iconDarkMode = btnDarkMode.querySelector('img');
+    const savedPreference = localStorage.getItem('dark-mode');
 
-    function actualizarIcono() {
-        const modoOscuro = document.body.classList.contains('dark-mode');
+    function updateIcon() {
+        const modeDarkMode = document.body.classList.contains('dark-mode');
 
-        iconoDarkMode.src = modoOscuro
+        iconDarkMode.src = modeDarkMode
             ? '/build/img/sun-solid.svg'
             : '/build/img/dark-mode.svg';
 
-        botonDarkMode.title = modoOscuro
+        btnDarkMode.title = modeDarkMode
             ? 'Activar modo claro'
             : 'Activar modo oscuro';
         
-        botonDarkMode.setAttribute('aria-label', botonDarkMode.title);
+        btnDarkMode.setAttribute('aria-label', btnDarkMode.title);
     }
 
-    if(preferenciaGuardada === 'dark') {
+    if (savedPreference === 'dark') {
         document.body.classList.add('dark-mode');
-    } else if(preferenciaGuardada === 'light') {
+    } else if (savedPreference === 'light') {
         document.body.classList.remove('dark-mode');
-    } else if(prefiereDarkMode.matches) {
+    } else if (prefersDarkMode.matches) {
         document.body.classList.add('dark-mode');
     } else {
         document.body.classList.remove('dark-mode');
     }
 
-    actualizarIcono();
+    updateIcon();
 
-    prefiereDarkMode.addEventListener('change', function() {
+    prefersDarkMode.addEventListener('change', function () {
         if(!localStorage.getItem('dark-mode')) {
             document.body.classList.toggle('dark-mode');
-            actualizarIcono();
+            updateIcon();
         }
     });
 
-    botonDarkMode.addEventListener('click', function() {
+    btnDarkMode.addEventListener('click', function () {
         document.body.classList.toggle('dark-mode');
         localStorage.setItem(
             'dark-mode',
             document.body.classList.contains('dark-mode') ? 'dark' : 'light'
         );
-        actualizarIcono();
+        updateIcon();
     });
 }
 
 function eventListeners() {
-    const mobileMenu = document.querySelector('.mobile-menu');
+    const phoneMenu = document.querySelector('.hamburger-menu');
 
-    mobileMenu.addEventListener('click', navegacionResponsive);
+    phoneMenu.addEventListener('click', responsiveNavegation);
 
-    //muestra campos condicionales en formulario de contacto
-    const metodoContacto = document.querySelectorAll('input[name="contacto[contacto]"]');
-    metodoContacto.forEach(input => input.addEventListener('click', seleccionarMetodo));
+    //muestra campos condicionales en formulario de contact
+    const contactMethod = document.querySelectorAll('input[name="contact[contact]"]');
+    contactMethod.forEach(input => input.addEventListener('click', selectMethod));
 }
 
-function navegacionResponsive() {
-    const navegacion = document.querySelector('.navegacion');
-    navegacion.classList.toggle('mostrar')
+function responsiveNavegation() {
+    const navegation = document.querySelector('.navegation');
+    navegation.classList.toggle('show')
 }
 
-function seleccionarMetodo(e) {
-    const contactoDiv = document.querySelector('#contacto');
-    if(e.target.value === 'telefono') {
-        contactoDiv.innerHTML = `
-            <label for="telefono"></label>
-            <input type="number" class="muestra" placeholder="&#xf095;" id="telefono" name="contacto[telefono]">
+function selectMethod(e) {
+    const contactDiv = document.querySelector('#contact');
+    if (e.target.value === 'phone') {
+        contactDiv.innerHTML = `
+            <label for="phone"></label>
+            <input type="number" class="sample" placeholder="&#xf095;" id="phone" name="contact[phone]">
 
             <p>Elija la fecha y la hora que mejor le convenga para que le llamemos</p>
 
-            <label for="fecha">Fecha:</label>
-            <input type="date" id="fecha" name="contacto[fecha]">
+            <label for="date">Fecha:</label>
+            <input type="date" id="date" name="contact[fecha]">
 
-            <label for="hora">Hora (9-18h):  </label>
-            <input type="time" id="hora" min="09:00" max="18:00" name="contacto[hora]">
+            <label for="hour">Hora (9-18h):  </label>
+            <input type="time" id="hour" min="09:00" max="18:00" name="contact[hora]">
         `;
     } else {
-        contactoDiv.innerHTML = `
+        contactDiv.innerHTML = `
             <label for="email"></label>
-            <input type="email" class="muestra" placeholder="&#xf0e0;" id="email" name="contacto[email]" required>
+            <input type="email" class="sample" placeholder="&#xf0e0;" id="email" name="contact[email]" required>
         `;
     }
 }

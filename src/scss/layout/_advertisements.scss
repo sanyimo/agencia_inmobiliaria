@@ -3,39 +3,39 @@
 @use '../base/mixins' as m;
 
 @include m.tablet {
-    .contenedor-anuncios {
+    .container-advertisements {
         @include m.grid(2, 2rem);
     }
 }
+
 @include m.desktop {
-    .contenedor-anuncios {
+    .container-advertisements {
         @include m.grid(3, 2rem);
     }
 }
 
-
-.anuncio {
-    background-color: color.adjust(v.$gris, $lightness: +5%);
+.advertisement {
+    background-color: color.adjust(v.$gray, $lightness: +5%);
     border-radius: 1rem;
-    border-bottom: 1px solid color.adjust(v.$gris, $lightness: -8%);
+    border-bottom: 1px solid color.adjust(v.$gray, $lightness: -8%);
     margin-bottom: 2rem;
 
-    .contenido-anuncio {
+    .content-advertisement {
         padding: 1rem;
     }
 
     h3, p {
         margin: 0;
     }
- 
 }
-.precio {
-    color: v.$amarillo;
+
+.price {
+    color: v.$creme;
     font-weight: v.$bold;
     font-size: 3rem;
 }
 
-.iconos-caracteristicas {
+.icons-features {
     display: flex;
     list-style: none;
     padding: 0;
@@ -53,9 +53,7 @@
             }
         }
         p {
-            font-weight: v.$black;
-        }
-        
-    }
-    
+            font-weight: black;
+        }        
+    }    
 }

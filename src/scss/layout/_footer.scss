@@ -2,21 +2,21 @@
 
 .footer {
     padding: 1.5rem 0 ;
-    background-color: v.$grisOscuro;
+    background-color: v.$darkGray;
     margin-bottom: 0;
     
-    /*.contenedor-footer {
-        padding-top: v.$separacion * 0.5;
+    /*.container-footer {
+        padding-top: v.$separation * 0.5;
     }*/
 
-    .navegacion {
+    .navegation {
         visibility: visible;
         opacity: 1;
         height: auto;
     }
 
     .copyright {
-        color: v.$blanco;
+        color: v.$white;
         text-align: center;
         margin-bottom: 0.8rem;
     }

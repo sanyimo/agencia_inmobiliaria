@@ -1,12 +1,12 @@
 @use 'variables' as v;
 @use 'mixins' as m;
 
-.boton-amarillo {
-    @include m.boton(v.$amarillo, inline-block);
+.btn-yellow {
+    @include m.btn(v.$creme, inline-block);
 }
 
-.boton-amarillo-block {
-    @include m.boton(v.$amarillo, block);
+.btn-yellow-block {
+    @include m.btn(v.$creme, block);
     
     input {
         border: none;
@@ -15,11 +15,12 @@
     }
 }
 
-.boton-verde {
-    @include m.boton(v.$teja, inline-block);
+.btn-roof {
+    @include m.btn(v.$roof, inline-block);
 }
-.boton-gris-block {
-    @include m.boton(v.$grisRaton, block);
+
+.btn-gray-block {
+    @include m.btn(v.$mouseGray, block);
     i {
         position: absolute;
         margin-top: 1rem;
@@ -37,6 +38,7 @@
     
     width: 100%;
  }
- .boton-verde-block {
-     @include m.boton(v.$teja, block);
+
+ .btn-roof-block {
+     @include m.btn(v.$roof, block);
  }

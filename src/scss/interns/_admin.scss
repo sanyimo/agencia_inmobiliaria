@@ -1,16 +1,16 @@
 @use 'sass:color';
 @use '../base/variables' as v;
 
-table.propiedades {
+table.properties {
     margin-top: 5rem;
     width: 100%;
     border-spacing: 0;   
 
     thead {
-        background-color: v.$grisRaton;
+        background-color: v.$mouseGray;
 
         th {
-            color: v.$blanco;
+            color: v.$white;
             padding: 2rem;
             
         }
@@ -22,11 +22,11 @@ table.propiedades {
             
         }
     tr:nth-child(2n) {
-        background-color: color.adjust(v.$gris, $lightness: +7%);
+        background-color: color.adjust(v.$gray, $lightness: +7%);
         
     }
 
-    .imagen-tabla {
+    .image-table {
         width: 12rem;
     }
 
@@ -34,9 +34,9 @@ table.propiedades {
 
 .pic-small {
     width: 30rem;
-    color: v.$blanco;
+    color: v.$white;
     font-size: 1.1rem;
 }
-.tabla-contenido {
+.table-content {
     visibility: hidden;
 }

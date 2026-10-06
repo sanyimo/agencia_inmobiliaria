@@ -1,18 +1,20 @@
-
 @use '../base/variables' as v;
 @use '../base/mixins' as m;
-.no-webp .inicio {
+
+
+.no-webp .start {
     background-image: url(../img/header.jpg);
 }
-.webp .inicio {
+
+.webp .start {
     background-image: url(../img/header.webp);
 }
 
 .header {
-    background-color: v.$grisOscuro;
+    background-color: v.$darkGray;
     padding-bottom: 3rem;
     
-    &.inicio {
+    &.start {
         background-position: center center;
         background-size: cover;
 
@@ -20,7 +22,7 @@
             min-height: 70rem;
         }
 
-        .contenido-header {
+        .content-header {
             @include m.tablet {
                 min-height: 70rem;
             }
@@ -28,14 +30,14 @@
     }
 }
 
-.contenido-header {
+.content-header {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
     h1 {
         text-align: left;
-        color: v.$blanco;
+        color: v.$white;
         font-weight: v.$bold;
         line-height: 2;
         max-width: 60rem;

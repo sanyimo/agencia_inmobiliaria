@@ -3,101 +3,103 @@
 @use 'mixins' as m;
 
 .dark-mode {
-    background-color: color.adjust(v.$grisOscuro, $lightness: -10%);
+    background-color: color.adjust(v.$darkGray, $lightness: -10%);
     //transition: background-color 0.5s;
 
-    p:not(.precio) {
-        color: v.$blanco;
+    p:not(.price) {
+        color: v.$white;
     }
 
     h1,h2,h3,h4  {
-        color: v.$gris;
+        color: v.$gray;
     }
-    .amarillo {
-        color: v.$amarillo;
+    .creme {
+        color: v.$creme;
     }
-    .boton-amarillo {
-        @include m.boton(color.adjust(v.$naranja, $lightness: -6%), inline-block);
+    .btn-yellow {
+        @include m.btn(color.adjust(v.$orange, $lightness: -6%), inline-block);
     }
     
-    .boton-amarillo-block {
-        @include m.boton(color.adjust(v.$naranja, $lightness: -6%), block);
+    .btn-yellow-block {
+        @include m.btn(color.adjust(v.$orange, $lightness: -6%), block);
     }
-    .boton-verde {
-        @include m.boton(v.$amarillo, inline-block);
+    .btn-roof {
+        @include m.btn(v.$creme, inline-block);
     }
-    .imagen-contacto h2 {
-        color: v.$gris;
+    .image-contact h2 {
+        color: v.$gray;
     }
-    .entrada-blog {
+    .entry-blog {
         margin-bottom: 2rem;
     }
     .testimonial {
-        background-color: v.$amarillo;
+        background-color: v.$creme;
     }
-    .anuncio, 
-    .resumen-propiedad,
-    .gris {
-        background-color: v.$grisOscuro;
-        border: 1px solid v.$grisOscuro;
+    .advertisement, 
+    .summary-propad,
+    .gray {
+        background-color: v.$darkGray;
+        border: 1px solid v.$darkGray;
 
-        .precio {
-            color: v.$amarillo;
+        .price {
+            color: v.$creme;
         }
-        .icono {
+        .icon {
             filter: invert(100%);
         }
     }
-    .formulario fieldset {
-            background-color: color.adjust(v.$grisOscuro, $lightness: -7%);
+    .form fieldset {
+            background-color: color.adjust(v.$darkGray, $lightness: -7%);
         }
     
-    .texto-nosotros blockquote {
-        color: v.$blanco;
+    .text-aboutUs blockquote {
+        color: v.$white;
     }
-    .informacion-meta {
+
+    .info-meta {
         span {
-            color: v.$naranja;
+            color: v.$orange;
         }
     }
-    .texto-entrada h4:after {
-        background-color: v.$amarillo;
+
+    .text-entry h4:after {
+        background-color: v.$creme;
     }
     
-    .formulario {
+    .form {
         label,
         legend,
         p {
-            color: v.$blanco;
+            color: v.$white;
         }
 
         .pic-small {
-            color: v.$blanco;
+            color: v.$white;
         }
 
         input:not([type="submit"]), 
         textarea,
         select {
-            background-color: v.$grisOscuro;
-            border: 1px solid v.$grisOscuro;
-            color: v.$blanco;
+            background-color: v.$darkGray;
+            border: 1px solid v.$darkGray;
+            color: v.$white;
         }
     }
-    table.propiedades {
+    table.properties {
         thead {
-            background-color: color.adjust(v.$grisOscuro, $lightness: +10%);
-            border: 1px solid v.$gris;
+            background-color: color.adjust(v.$darkGray, $lightness: +10%);
+            border: 1px solid v.$gray;
 
         }
         tr:nth-child(2n) {
-            background-color: color.adjust(v.$grisOscuro, $lightness: -8%);
+            background-color: color.adjust(v.$darkGray, $lightness: -8%);
 
         }
         &:nth-child(2n+1) {
-            background-color: color.adjust(v.$grisOscuro, $lightness: -4%);
+            background-color: color.adjust(v.$darkGray, $lightness: -4%);
         }
         td {
-            color: v.$blanco;
+            color: v.$white;
         }
     }
 }
