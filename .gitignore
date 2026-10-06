@@ -2,7 +2,7 @@
 node_modules
 vendor/
 
-usuario.php
+user.php
 *.env
 *.dump
 *.sql

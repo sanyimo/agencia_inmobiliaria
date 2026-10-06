@@ -1,10 +1,10 @@
-<footer class="footer seccion">
-    <div class="contenedor contenedor-footer">
-        <nav class="navegacion">
-            <a href="/nosotros"><?php echo t('Nosotros'); ?></a>
-            <a href="/anuncios"><?php echo t('Anuncios'); ?></a>
+<footer class="footer section">
+    <div class="container container-footer">
+        <nav class="navegation">
+            <a href="/aboutUs"><?php echo t('Nosotros'); ?></a>
+            <a href="/advertisements"><?php echo t('Anuncios'); ?></a>
             <a href="/blog">Blog</a>
-            <a href="/contacto"><?php echo t('Contacto'); ?></a>
+            <a href="/contact"><?php echo t('Contacto'); ?></a>
         </nav>
     </div>
     

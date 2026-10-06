@@ -1,12 +1,12 @@
-<main class="contenedor seccion contenido-centrado">
-    <?php $titulo = $titulo ?? 'Iniciar sesión'; ?>
-    <h1 class="amarillo"><?php echo t($titulo); ?></h1>
+<main class="container section content-centered">
+    <?php $header = $header ?? 'Iniciar sesión'; ?>
+    <h1 class="creme"><?php echo t($header); ?></h1>
 
     <?php
-    $alertas = $alertas ?? [];
-    include_once __DIR__ . '/../templates/alertas.php' ?>
+    $alerts = $alerts ?? [];
+    include_once __DIR__ . '/../templates/alerts.php' ?>
 
-    <form method="POST" class="formulario" action="/login">
+    <form method="POST" class="form" action="/login">
         <fieldset>
             <legend><?php echo t('Correo electrónico y contraseña'); ?></legend>
 
@@ -17,6 +17,6 @@
             <input type="password" name="password" placeholder="<?php echo t('Tu contraseña'); ?>" id="password">
         </fieldset>
 
-        <input type="submit" value="<?php echo t('Iniciar sesión'); ?>" class="boton boton-verde">
+        <input type="submit" value="<?php echo t('Iniciar sesión'); ?>" class="btn btn-roof">
     </form>
 </main>

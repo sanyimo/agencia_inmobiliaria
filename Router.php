@@ -1,45 +1,46 @@
 <?php
 namespace MVC;
 class Router {
-    public array $rutasGet = [];
-    public array $rutasPost = [];
+    public array $getRoutes = [];
+    public array $postRoutes = [];
 
     public function get(string $url, callable $fn) {
-        $this->rutasGet[$url] = $fn;
+        $this->getRoutes[$url] = $fn;
     }
 
     public function post(string $url, callable $fn) {
-        $this->rutasPost[$url] = $fn;
+        $this->postRoutes[$url] = $fn;
     }
 
-    public function comprobarRutas() {
+    public function checkRoutes()
+    {
         session_start();
 
         $auth = $_SESSION['login'] ?? null;
-       
+
         //arreglo de rutas protegidas
-        $rutas_protegidas = ['/admin','/propiedades/admin', '/propiedades/crear', '/propiedades/actualizar', '/propiedades/eliminar', 'vendedores/admin', '/vendedores/crear', '/vendedores/actualizar', '/vendedores/eliminar'];
-        $rutas_demo_bloqueadas = ['/propiedades/crear', '/propiedades/actualizar', '/propiedades/eliminar', '/vendedores/crear', '/vendedores/actualizar', '/vendedores/eliminar'];
-        $urlActual = $_SERVER['PATH_INFO'] ?? '/' ;//path_info no existe en apache sino request_uri
-        //$urlActual = $_SERVER['REQUEST_URI'] === '' ? '/' : $_SERVER['REQUEST_URI'] ;
-        $metodo = $_SERVER['REQUEST_METHOD'];
-        //debuguear($urlActual);
-        
-        if ($metodo === 'GET') {
-            $fn = $this->rutasGet[$urlActual] ?? null;
+        $protected_routes = ['/admin', '/properties/admin', '/properties/create', '/properties/update', '/properties/delete', 'sellers/admin', '/sellers/create', '/sellers/update', '/sellers/delete'];
+        $blocked_demo_routes = ['/properties/create', '/properties/update', '/properties/delete', '/sellers/create', '/sellers/update', '/sellers/delete'];
+        $currentUrl = $_SERVER['PATH_INFO'] ?? '/'; //path_info no existe en apache sino request_uri
+        //$vurrentUrl = $_SERVER['REQUEST_URI'] === '' ? '/' : $_SERVER['REQUEST_URI'] ;
+        $method = $_SERVER['REQUEST_METHOD'];
+        //debug($currentUrl);
+
+        if ($method === 'GET') {
+            $fn = $this->getRoutes[$currentUrl] ?? null;
         } else {
-            $fn = $this->rutasPost[$urlActual] ?? null;
+            $fn = $this->postRoutes[$currentUrl] ?? null;
         }
 
         //proteger las rutas
-        if(in_array($urlActual, $rutas_protegidas) && !$auth) {
+        if (in_array($currentUrl, $protected_routes) && !$auth) {
 
            header('Location: /');
            exit;
         }
 
         if($_SESSION['demo'] ?? false) {
-            if($metodo === 'POST' && in_array($urlActual, $rutas_demo_bloqueadas)) {
+            if ($method === 'POST' && in_array($currentUrl, $blocked_demo_routes)) {
                 header('Location: /admin');
                 exit;
             }
@@ -54,9 +55,10 @@ class Router {
     }
 
     //muestra una vista
-    public function render(string $view, array $datos = []) {
+    public function render(string $view, array $data = [])
+    {
         // Leer lo que le pasamos  a la vista
-        foreach ($datos as $key => $value) {
+        foreach ($data as $key => $value) {
             $$key = $value;  // Doble signo de dolar significa: variable variable, básicamente nuestra variable sigue siendo la original, pero al asignarla no reescribe el original, mantiene su valor, de esta forma el nombre de la variable se asigna dinamicamente
         }
 
@@ -64,7 +66,7 @@ class Router {
 
         // entonces incluimos la vista en el layout
         include_once __DIR__ . "/views/$view.php";
-        $contenido = ob_get_clean(); // Limpia el Buffer
+        $content = ob_get_clean(); // Limpia el Buffer
         include_once __DIR__ . '/views/layout.php';
     }
 }
