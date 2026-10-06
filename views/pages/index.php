@@ -1,30 +1,30 @@
-<main class="contenedor seccion">
-    <h1 class="amarillo">Más sobre nosotros</h1>
-    <?php include 'iconos.php'; ?>
+<main class="container section">
+    <h1 class="creme">Más sobre nosotros</h1>
+    <?php include 'icons.php'; ?>
 </main>
 
-<section class="seccion contenedor">
-    <h2 class="amarillo">Casas y apartamentos en venta</h2>
+<section class="section container">
+    <h2 class="creme">Casas y apartamentos en venta</h2>
 
-    <?php include 'listado.php'; ?>
+    <?php include 'listing.php'; ?>
 
-    <div class="alinear-derecha">
-        <a href="/propiedades" class="boton-verde">Ver todas</a>
+    <div class="align-right">
+        <a href="/properties" class="btn-roof">Ver todas</a>
     </div>
 </section>
 
-<section class="imagen-contacto">
-    <h2 class="amarillo">Encuentra la casa de tus sueños</h2>
+<section class="image-contact">
+    <h2 class="creme">Encuentra la casa de tus sueños</h2>
     <p>Llena el formulario de contacto y un asesor se pondrá en contacto contigo a la mayor brevedad</p>
-    <a href="contacto" class="boton-amarillo">Contactános</a>
+    <a href="contact" class="btn-yellow">Contactános</a>
 </section>
 
-<div class="contenedor seccion seccion-inferior">
-    <section class="blog gris">
-        <h3 class="amarillo gris">Nuestro Blog</h3>
+<div class="container section section-inferior">
+    <section class="blog gray">
+        <h3 class="creme gray">Nuestro Blog</h3>
 
-        <article class="entrada-blog gris">
-            <div class="imagen">
+        <article class="entry-blog gray">
+            <div class="image">
                 <picture>
                     <source srcset="build/img/blog1.webp" type="image/webp">
                     <source srcset="build/img/blog1.avif" type="image/avif">
@@ -33,10 +33,10 @@
                 </picture>
             </div>
 
-            <div class="texto-entrada">
-                <a href="entrada">
+            <div class="text-entry">
+                <a href="entry">
                     <h4>Terraza en el techo de tu casa</h4>
-                    <p class="informacion-meta">Escrito el: <span>20/10/2025</span> por: <span>Admin</span> </p>
+                    <p class="info-meta">Escrito el: <span>20/10/2025</span> por: <span>Admin</span> </p>
 
                     <p>
                         Consejos para construir una terraza en el techo de tu casa con los mejores materiales y ahorrando dinero
@@ -45,8 +45,8 @@
             </div>
         </article>
 
-        <article class="entrada-blog gris">
-            <div class="imagen">
+        <article class="entry-blog gray">
+            <div class="image">
                 <picture>
                     <source srcset="build/img/blog2.webp" type="image/webp">
                     <source srcset="build/img/blog2.avif" type="image/avif">
@@ -55,10 +55,10 @@
                 </picture>
             </div>
 
-            <div class="texto-entrada">
-                <a href="entrada2">
+            <div class="text-entry">
+                <a href="entry2">
                     <h4>Guía para la decoración de tu hogar</h4>
-                    <p class="informacion-meta">Escrito el: <span>20/10/2025</span> por: <span>Admin</span> </p>
+                    <p class="info-meta">Escrito el: <span>20/10/2025</span> por: <span>Admin</span> </p>
 
                     <p>
                         Maximiza el espacio en tu hogar con esta guia, aprende a combinar muebles y colores para darle vida a tu espacio
@@ -68,8 +68,8 @@
         </article>
     </section>
 
-    <section class="testimoniales">
-        <h3 class="amarillo">Testimoniales</h3>
+    <section class="testimonials">
+        <h3 class="creme">Testimoniales</h3>
 
         <div class="testimonial">
             <blockquote>

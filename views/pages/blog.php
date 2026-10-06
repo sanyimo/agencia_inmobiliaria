@@ -1,7 +1,7 @@
-<main class="contenedor seccion contenido-centrado">
-    <h1 class="amarillo"><?php echo $titulo ?? 'Blog'; ?></h1>
-    <article class="entrada-blog gris">
-        <div class="imagen">
+<main class="container section content-centered">
+    <h1 class="creme"><?php echo $header ?? 'Blog'; ?></h1>
+    <article class="entry-blog gray">
+        <div class="image">
             <picture>
                 <source srcset="build/img/blog1.webp" type="image/webp">
                 <source srcset="build/img/blog1.avif" type="image/avif">
@@ -10,10 +10,10 @@
             </picture>
         </div>
 
-        <div class="texto-entrada">
-            <a href="/entrada">
+        <div class="text-entry">
+            <a href="/entry">
                 <h4>Terraza en el techo de tu casa</h4>
-                <p class="informacion-meta">Escrito el: <span>20/10/2025</span> por: <span>Admin</span> </p>
+                <p class="info-meta">Escrito el: <span>20/10/2025</span> por: <span>Admin</span> </p>
 
                 <p>
                     Consejos para construir una terraza en el techo de tu casa con los mejores materiales y ahorrando dinero
@@ -22,8 +22,8 @@
         </div>
     </article>
 
-    <article class="entrada-blog gris">
-        <div class="imagen">
+    <article class="entry-blog gray">
+        <div class="image">
             <picture>
                 <source srcset="build/img/blog2.webp" type="image/webp">
                 <source srcset="build/img/blog2.avif" type="image/avif">
@@ -32,10 +32,10 @@
             </picture>
         </div>
 
-        <div class="texto-entrada">
-            <a href="/entrada2">
+        <div class="text-entry">
+            <a href="/entry2">
                 <h4>Guía para la decoración de tu hogar</h4>
-                <p class="informacion-meta">Escrito el: <span>20/10/2025</span> por: <span>Admin</span> </p>
+                <p class="info-meta">Escrito el: <span>20/10/2025</span> por: <span>Admin</span> </p>
 
                 <p>
                     Maximiza el espacio en tu hogar con esta guia, aprende a combinar muebles y colores para darle vida a tu espacio
@@ -44,8 +44,8 @@
         </div>
     </article>
 
-    <article class="entrada-blog gris">
-        <div class="imagen">
+    <article class="entry-blog gray">
+        <div class="image">
             <picture>
                 <source srcset="build/img/blog3.webp" type="image/webp">
                 <source srcset="build/img/blog3.avif" type="image/avif">
@@ -54,10 +54,10 @@
             </picture>
         </div>
 
-        <div class="texto-entrada">
-            <a href="/entrada">
+        <div class="text-entry">
+            <a href="/entry">
                 <h4>Terraza en el techo de tu casa</h4>
-                <p class="informacion-meta">Escrito el: <span>20/10/2025</span> por: <span>Admin</span> </p>
+                <p class="info-meta">Escrito el: <span>20/10/2025</span> por: <span>Admin</span> </p>
 
                 <p>
                     Consejos para construir una terraza en el techo de tu casa con los mejores materiales y ahorrando dinero
@@ -66,8 +66,8 @@
         </div>
     </article>
 
-    <article class="entrada-blog gris">
-        <div class="imagen">
+    <article class="entry-blog gray">
+        <div class="image">
             <picture>
                 <source srcset="build/img/blog4.webp" type="image/webp">
                 <source srcset="build/img/blog4.avif" type="image/avif">
@@ -76,10 +76,10 @@
             </picture>
         </div>
 
-        <div class="texto-entrada">
-            <a href="/entrada">
+        <div class="text-entry">
+            <a href="/entry">
                 <h4>Guía para la decoración de tu hogar</h4>
-                <p class="informacion-meta">Escrito el: <span>20/10/2025</span> por: <span>Admin</span> </p>
+                <p class="info-meta">Escrito el: <span>20/10/2025</span> por: <span>Admin</span> </p>
 
                 <p>
                     Maximiza el espacio en tu hogar con esta guia, aprende a combinar muebles y colores para darle vida a tu espacio
