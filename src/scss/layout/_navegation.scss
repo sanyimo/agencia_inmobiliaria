@@ -1,0 +1,174 @@
+@use 'sass:color';
+@use '../base/variables' as v;
+@use '../base/mixins' as m;
+
+
+@keyframes breathing {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 hsl(var(--primary))
+    }
+
+    50% {
+        transform: scale(1.03);
+        box-shadow: 0 0 20px 5px hsl(var(--primary)/.3)
+    }
+
+    to {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 hsl(var(--primary))
+    }
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include m.tablet {
+        align-items: flex-end;
+    }
+
+    .dark-mode-btn {
+        width: 4.8rem;
+        margin-top: 3rem;
+        margin-bottom: 2rem;
+        padding: .5rem;
+        border: 0;
+        background: transparent;
+        filter: invert(100%);
+        cursor: pointer;
+
+        &:hover {
+            transform: scale(1.1);
+            transition: all 0.3s ease-in-out;
+        }
+
+        &:active {
+            color: color.adjust(v.$white, $lightness: -7%);
+            transform: scale(0.6) rotateZ(50deg) !important;
+            transition: all 0.1s ease-in-out !important;
+        }
+
+        @include m.tablet {
+            margin-top: 0;
+        }
+    }
+}
+
+.bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2rem;
+
+    @include m.tablet {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+
+        img:not(.dark-mode-btn img) {
+            &:hover {
+                animation: breathing 2s ease-in-out infinite
+            }
+        }
+    }
+}
+
+.navegation {
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+
+    @include m.tablet {
+        display: flex;
+        align-items: center;
+        opacity: 1;
+        visibility: visible;
+        transition: visibility .3s ease-in-out, opacity .5s linear, height .5s linear;
+    }
+
+    a {
+        color: v.$white;
+        text-decoration: none;
+        font-size: 2.2rem;
+        display: block;
+        text-align: center;
+
+        @include m.tablet {
+            margin-right: 2rem;
+            font-size: 1.8rem;
+            transition: transform 0.3s ease;
+
+            &:last-of-type {
+                margin-right: 0;
+            }
+        }
+
+        &:hover,
+        &.active {
+            transform: translateY(-5px);
+            color: v.$creme;
+            text-decoration: underline v.$creme 3px;
+            text-underline-offset: 15px;
+        }
+
+        &.active:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+    }
+
+    a.admin-link {
+        margin-left: 4rem;
+    }
+}
+
+.hamburger-menu {
+    @include m.tablet {
+        display: none;
+    }
+
+    &:active {
+        transform: scale(.7, .7);
+        transition: all 0.1s ease-in-out;
+    }
+
+    img {
+        width: 5rem;
+    }
+}
+
+.show {
+    visibility: visible;
+    opacity: 1;
+    height: auto;
+}
+
+.lang-selector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .7rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+
+    @include m.tablet {
+        margin-bottom: 1rem;
+    }
+
+    a {
+        margin-right: 0;
+        font-size: 1.4rem;
+        color: v.$white;
+        text-decoration: none;
+
+        &:hover,
+        &.activo {
+            color: v.$creme;
+        }
+    }
+
+    span {
+        color: v.$white;
+    }
+}
